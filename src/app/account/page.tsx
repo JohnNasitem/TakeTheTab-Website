@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { UserApiService } from "@/components/server-api-serivces/user-api-service"
 import { AuthApiService } from "@/components/server-api-serivces/auth-api-service"
 import { useRouter } from 'next/navigation';
@@ -25,11 +25,9 @@ export default function AccountPage() {
     const [isEditing, setIsEditing] = useState(false);
     const [canChangePassword, setCanChangePassword] = useState(false);
 
-    const fields = [
-        document.getElementById("account-old-password") as HTMLInputElement, 
-        document.getElementById("account-new-password") as HTMLInputElement, 
-        document.getElementById("account-confirm-new-password") as HTMLInputElement
-    ];
+    const oldPasswordRef = useRef<HTMLInputElement>(null);
+    const newPasswordRef = useRef<HTMLInputElement>(null);
+    const confirmNewPasswordRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
         const getData = async () => {
@@ -62,21 +60,25 @@ export default function AccountPage() {
         let areAllFieldsPopulated = true;
         let areNewPasswordsTheSame = true;
 
-        const arePasswordsDifferent = fields[0].value !== fields[1].value;
+        const arePasswordsDifferent = oldPasswordRef.current?.value !== newPasswordRef.current?.value;
         
         // Check if any field is empty and add a red border if it is
-        for (let i = 0; i < fields.length; i++)
-            if (fields[i].value === "")
-                areAllFieldsPopulated = false;
+
+        if (oldPasswordRef.current?.value === "")
+            areAllFieldsPopulated = false;
+        else if (newPasswordRef.current?.value === "")
+            areAllFieldsPopulated = false;
+        else if (confirmNewPasswordRef.current?.value === "")
+            areAllFieldsPopulated = false;
 
         // Make sure the new password and confirm password fields match
-        if (fields[1].value !== fields[2].value) {
-            fields[1].classList.add("border-red-500");
-            fields[2].classList.add("border-red-500");
+        if (newPasswordRef.current?.value !== confirmNewPasswordRef.current?.value) {
+            newPasswordRef.current?.classList.add("border-red-500");
+            confirmNewPasswordRef.current?.classList.add("border-red-500");
             areNewPasswordsTheSame = false;
         } else {
-            fields[1].classList.remove("border-red-500");
-            fields[2].classList.remove("border-red-500");
+            newPasswordRef.current?.classList.remove("border-red-500");
+            confirmNewPasswordRef.current?.classList.remove("border-red-500");
         }
 
         setCanChangePassword(areAllFieldsPopulated && areNewPasswordsTheSame && arePasswordsDifferent);
@@ -132,9 +134,9 @@ export default function AccountPage() {
         if (data.actionSuccess) {
             setShowErrorMessage(false);
             setErrorMessage("");
-            fields[0].value = "";
-            fields[1].value = "";
-            fields[2].value = "";
+            if (oldPasswordRef.current) oldPasswordRef.current.value = "";
+            if (newPasswordRef.current) newPasswordRef.current.value = "";
+            if (confirmNewPasswordRef.current) confirmNewPasswordRef.current.value = "";
             alert("Password changed successfully!");
         }
         else{
@@ -195,6 +197,7 @@ export default function AccountPage() {
                     htmlFor="account-old-password" 
                     className="flex md:items-center">Old Password: </label>
                 <input 
+                    ref={oldPasswordRef}
                     id="account-old-password"
                     name="old-password"
                     onChange={ValidateNewPassword} 
@@ -206,6 +209,7 @@ export default function AccountPage() {
                     htmlFor="account-new-password" 
                     className="flex md:items-center">New Password: </label>
                 <input 
+                    ref={newPasswordRef}
                     id="account-new-password" 
                     name="new-password"
                     onChange={ValidateNewPassword} 
@@ -217,6 +221,7 @@ export default function AccountPage() {
                     htmlFor="account-confirm-new-password" 
                     className="flex md:items-center">Confirm New Password: </label>
                 <input 
+                    ref={confirmNewPasswordRef}
                     id="account-confirm-new-password" 
                     name="confirm-new-password"
                     onChange={ValidateNewPassword} 
