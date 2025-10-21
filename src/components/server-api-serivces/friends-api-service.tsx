@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { sendApiCall } from "@/components/server-api-serivces/api-util";
 import { GenericResponse, FetchUserFriendsResponse } from "@/interfaces/server-responses";
 
-const serverPath = "https://localhost:7255/api/friends";
+const serverPath = "https://api.takethetab.com/friends";
 
 interface RespondToFriendRequestType {
     otherUserId: number;

@@ -3,7 +3,7 @@ import { sendApiCall } from "@/components/server-api-serivces/api-util";
 import { FetchActivityResponse, GenericResponse, CreateActivityResponse } from "@/interfaces/server-responses";
 import { ActivityItem } from "@/interfaces/parameters"
 
-const serverPath = "https://localhost:7255/api/events";
+const serverPath = "https://api.takethetab.com/events";
 
 interface CreateActivityType {
     eventId: number;
