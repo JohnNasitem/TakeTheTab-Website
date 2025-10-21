@@ -34,7 +34,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <div className="text-[var(--color-foreground)] bg-[var(--color-background)] flex flex-col min-h-screen">
-          <Navbar links={navbarLinks} logo="/public/vercel.svg" />
+          <Navbar links={navbarLinks} logo="/vercel.svg" />
           <div className="flex-1">
             <AppProviders>
               {children}
