@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useEffect, act } from "react";
+import { useState, useEffect } from "react";
 import { ActivityApiService } from "@/components/server-api-serivces/activity-api-service"
 import { useRouter, useParams  } from "next/navigation";
-import { FetchActivityResponse, FetchActivityResponsePayee } from '@/interfaces/server-responses'
+import { FetchActivityResponse } from '@/interfaces/server-responses'
 import { ChevronDownIcon, PencilSquareIcon } from '@heroicons/react/20/solid'
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react'
 
