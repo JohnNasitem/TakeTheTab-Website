@@ -1,0 +1,124 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+
+  --color-background: #000000;
+  --color-foreground: #ffffff;
+  --color-disabled-foreground: #C0C0C0;
+  --color-bg-accent: #1C1C1E;
+  --color-bg-alt-accent: #2F2F2F;
+  --color-fg-accent: #e5e7eb;
+  --color-bad: #F44336;
+  --color-bad-accent: #C62828;
+  --color-good: #28a745;
+  --color-good-accent: #218838;
+  --color-action: #3B82F6;
+  --color-action-accent: #2563EB; 
+}
+
+@theme inline {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  --animate-wiggle: wiggle 1s ease-in-out infinite;
+  --animate-fade-in: fadeIn 1s ease-in-out;
+  --animate-fade-out: fadeOut 1s ease-in-out forwards;
+  --animate-slide-up: slideUp 1s ease-in-out;
+  --animate-fade-slide-in: fadeIn 1s ease-in-out, slideUp 1s ease-in-out;
+  --animate-fade-slide-out: fadeOut 1s ease-in-out forwards, slideDown 1s ease-in-out;
+  --animate-lift-up: liftUp 0.3s ease-in-out forwards;
+  --animate-lift-down: liftDown 0.3s ease-in-out forwards;
+  --animate-grow: grow 0.3s ease-in-out forwards;
+  --animate-shrink: shrink 0.3s ease-in-out;
+
+  @keyframes grow {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(1.15);
+    }
+  }
+  @keyframes shrink {
+    0% {
+      transform: scale(1.15);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  @keyframes liftUp {
+    0% {
+      transform: translateY(0px);
+    }
+    100% {
+      transform: translateY(-10px);
+    }
+  }
+  @keyframes liftDown {
+    0% {
+      transform: translateY(-10px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
+  @keyframes wiggle {
+    0%,
+    100% {
+      transform: rotate(-3deg);
+    }
+    50% {
+      transform: rotate(3deg);
+    }
+  }
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes slideUp {
+    0% {
+      transform: translateY(75px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  @keyframes fadeOut {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  @keyframes slideDown {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(75px);
+    }
+  }
+}
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+html {
+  background-color: black;
+}
+
+/*Scroll down to accomodate for the nav bar*/
+.pageSection  {
+  scroll-margin-top: 60px;
+  min-height: calc(100vh - 60px);
+}
