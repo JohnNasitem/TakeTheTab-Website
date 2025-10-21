@@ -3,8 +3,6 @@
 import { useState, useEffect } from "react";
 import { FriendsApiService } from "@/components/server-api-serivces/friends-api-service"
 import { useRouter, useParams  } from "next/navigation";
-import { ItemProps } from "@/components/list-item";
-import List from "@/components/list";
 import { FetchUserFriendsResponse } from '@/interfaces/server-responses'
 
 export default function FetchFriendPage() {
