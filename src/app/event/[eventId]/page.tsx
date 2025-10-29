@@ -102,9 +102,9 @@ export default function FetchEventPage() {
             {/* Event name and date */}
             <div className="col-span-2 md:col-span-1 grid grid-col-1 md:grid-cols-[auto_1fr] w-full gap-4 grid-rows-[1fr_auto] md:grid-rows-1 bg-[var(--color-bg-accent)] rounded-3xl p-5">
                 <div className="text-3xl md:text-7xl md:max-w-max grid w-full md:grid-cols-1 grid-cols-[1fr_auto] md:grid-rows-1 gap-2">
-                    <span className="md:flex md:items-end h-full font-bold text-ellipsis truncate max-w-[80dvw] md:max-w-[60dvw]">
+                    <h1 className="md:flex md:items-end h-full font-bold text-ellipsis truncate max-w-[80dvw] md:max-w-[60dvw]">
                         {event?.eventName ?? ""} 
-                    </span>
+                    </h1>
                     {
                         canModify &&
                         <div
@@ -170,7 +170,7 @@ export default function FetchEventPage() {
 
             {/* Participants */}
             <div className={`rounded-3xl bg-[var(--color-bg-accent)] p-5 grid gap-3 content-start h-full w-full col-span-2`}>
-                <h1 className="text-center text-3xl md:text-4xl">Participants</h1>
+                <span className="text-center text-3xl md:text-4xl">Participants</span>
                 {participants.map((participant) => (
                     <Disclosure 
                         key={participant.participantData.userId}

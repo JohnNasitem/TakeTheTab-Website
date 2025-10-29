@@ -59,9 +59,9 @@ export default function FetchActivityPage() {
 
             {/* Activity name*/}
             <div className="text-3xl md:text-7xl md:col-span-1 grid grid-cols-[1fr_auto] w-full gap-4 bg-[var(--color-bg-accent)] rounded-3xl p-5">
-                <span className="md:flex md:items-end h-max font-bold text-ellipsis truncate max-w-[80dvw] md:max-w-[60dvw] items-center">
+                <h1 className="md:flex md:items-end h-max font-bold text-ellipsis truncate max-w-[80dvw] md:max-w-[60dvw] items-center">
                     {activity?.activityName ?? ""} 
-                </span>
+                </h1>
                 {
                     activity?.isPayee &&
                     <div
@@ -157,7 +157,7 @@ export default function FetchActivityPage() {
 
             {/* Payers */}
             <div className={`rounded-3xl bg-[var(--color-bg-accent)] p-5 grid gap-3 content-start h-full w-full`}>
-                <h1 className="text-center text-3xl md:text-4xl">Payers</h1>
+                <span className="text-center text-3xl md:text-4xl">Payers</span>
                 {activity?.payers?.map((payer) => (
                     <Disclosure 
                         key={payer.payerId}

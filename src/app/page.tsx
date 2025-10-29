@@ -48,9 +48,9 @@ export default function Home() {
     <div className="pageSection p-3 grid grid-rows-[auto_auto_1fr] md:grid-rows-[auto_1fr] grid-cols-2 md:grid-cols-[66fr_17fr_17fr] gap-4">
       {/* Display name */}
       <div className="text-3xl md:text-7xl col-span-2 md:col-span-1 w-full gap-4 grid-rows-[1fr_auto] md:grid-rows-1 bg-[var(--color-bg-accent)] rounded-3xl p-5">
-          <span className="flex justify-center md:justify-start md:items-center h-full font-bold text-ellipsis truncate max-w-full">
-            {displayName ?? ""} 
-        </span>
+        <h1 className="flex justify-center md:justify-start md:items-center h-full font-bold text-ellipsis truncate max-w-full">
+          {displayName ?? ""} 
+        </h1>
       </div>
 
       {/* Owed amount */}

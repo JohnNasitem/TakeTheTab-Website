@@ -14,7 +14,7 @@ const List = (props: ListProps) => {
     
     return (
         <div className={`font-[family-name:var(--font-geist-mono)] rounded-3xl bg-[var(--color-bg-accent)] p-5 grid gap-3 content-start h-full w-full`}>
-            <h1 className="text-center text-3xl md:text-4xl">{props.title}</h1>
+            <span className="text-center text-3xl md:text-4xl">{props.title}</span>
             {
                 props.allowModify &&
                 <button 

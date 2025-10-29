@@ -1,21 +1,25 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0a0a0a;
-  --foreground: #ededed;
+  --background: #08141e;
+  --foreground: #f0e0d0;
 
-  --color-background: #000000;
-  --color-foreground: #ffffff;
-  --color-disabled-foreground: #C0C0C0;
-  --color-bg-accent: #1C1C1E;
-  --color-bg-alt-accent: #2F2F2F;
-  --color-fg-accent: #e5e7eb;
-  --color-bad: #F44336;
-  --color-bad-accent: #C62828;
-  --color-good: #28a745;
-  --color-good-accent: #218838;
-  --color-action: #3B82F6;
-  --color-action-accent: #2563EB; 
+  --color-background: #16161D;
+  --color-bg-accent: #2A2A36;
+  --color-bg-alt-accent: #54546D;
+
+  --color-foreground: #DCD7BA; /* f6d6bd */
+  --color-fg-accent: #C8C093;
+  --color-disabled-foreground: #717C7C;
+
+  --color-bad: #C34043;
+  --color-bad-accent: #E82424; 
+
+  --color-good: #76946A;
+  --color-good-accent: #98BB6C; 
+
+  --color-action: #7FB4CA;
+  --color-action-accent: #7E9CD8
 }
 
 @theme inline {
@@ -110,7 +114,11 @@
 body {
   background-color: var(--color-background);
   color: var(--color-foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-manrope), sans-serif;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-ubuntu) sans-serif;
 }
 
 html {

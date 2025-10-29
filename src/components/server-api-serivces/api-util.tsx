@@ -13,7 +13,7 @@ export async function sendApiCall<T>(url: string, method: string, body?: string)
 
     const res = await fetch(url, options);
 
-    if (!res.ok) 
+    if (!res.ok)
         throw new Error(`Api call failed! Endpoint: ${url}, Method: ${method}, Body: ${body}, Erorr: ${res.status} - ${res.statusText}`);
 
     const data = await res.json() as T;

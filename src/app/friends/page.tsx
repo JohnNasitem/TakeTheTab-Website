@@ -122,7 +122,7 @@ export default function FriendPage() {
     return (
         <div className="pageSection p-3 flex flex-col">
             <div className="grid grid-rows-[auto_auto_auto_1fr] bg-[var(--color-bg-accent)] rounded-lg p-3 text-1xl md:text-2xl gap-3 h-full flex-1">
-                <div className="text-center text-3xl md:text-4xl font-bold"> Your Friends </div>
+                <h1 className="text-center text-3xl md:text-4xl font-bold"> Your Friends </h1>
                 <form 
                     onSubmit={AddFriend}
                     id="friend-search" 
