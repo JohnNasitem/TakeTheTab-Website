@@ -7,6 +7,7 @@ import { AppProviders } from "@/components/providers/app-providers";
 export const metadata: Metadata = {
   title: "Take The Tab",
   description: "A platform used to manage shared bills",
+  icons: "/icon.svg"
 };
 
 const manrope = Manrope({

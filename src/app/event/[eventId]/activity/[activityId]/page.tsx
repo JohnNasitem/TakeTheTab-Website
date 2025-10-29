@@ -68,7 +68,7 @@ export default function FetchActivityPage() {
                         className="flex justify-end">
                         <button
                             type="button"
-                            className="w-7 h-7"
+                            className="w-10 h-10"
                             onClick={() => router.push(`${params.activityId}/edit`)}>
                             <PencilSquareIcon className="stroke-[var(--color-foreground)] group-hover:stroke-[var(--color-foreground-accent)] w-full h-full"/>
                         </button>

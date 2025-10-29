@@ -148,7 +148,7 @@ export default function AccountPage() {
 
     return (
         <div className="pageSection grid grid-rows-[repeat(2,_auto)_1fr] gap-3 p-3">
-            <form onSubmit={EditProfile} id="AccountProfile" className="grid grid-cols-1 md:grid-cols-[max-content_1fr] h-max bg-[var(--color-bg-accent)] rounded-lg p-3 text-1xl md:text-2xl gap-3">
+            <form onSubmit={EditProfile} id="AccountProfile" className="grid grid-cols-1 md:grid-cols-[max-content_1fr] h-max bg-[var(--color-bg-accent)] rounded-3xl p-3 text-1xl md:text-2xl gap-3">
                 <div className="text-center text-3xl md:text-4xl font-bold md:col-span-2"> Profile </div>
 
                 <label 
@@ -183,7 +183,7 @@ export default function AccountPage() {
                 </button>
             </form>
 
-            <form onSubmit={editPassword} id="AccountPassword" className="grid grid-col-1 md:grid-cols-[max-content_1fr] h-max bg-[var(--color-bg-accent)] rounded-lg p-3 text-1xl md:text-2xl gap-3">
+            <form onSubmit={editPassword} id="AccountPassword" className="grid grid-col-1 md:grid-cols-[max-content_1fr] h-max bg-[var(--color-bg-accent)] rounded-3xl p-3 text-1xl md:text-2xl gap-3">
                 <div className="text-center text-3xl md:text-4xl font-bold md:col-span-2"> Password </div>
 
                 {/* Hidden username field for password managers */}
@@ -247,7 +247,7 @@ export default function AccountPage() {
             </form>
 
             <div
-                className="grid grid-col-1 md:grid-cols-[max-content_1fr] h-max rounded-lg p-3 text-1xl md:text-2xl gap-3">
+                className="grid grid-col-1 md:grid-cols-[max-content_1fr] h-max rounded-3xl p-3 text-1xl md:text-2xl gap-3">
                 <button 
                     onClick={logOut} 
                     className="bg-[#F44336] rounded-lg pt-3 pb-3 pl-6 pr-6 hover:bg-[#C62828] md:col-2 w-max justify-self-end">

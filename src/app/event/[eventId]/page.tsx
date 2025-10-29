@@ -111,7 +111,7 @@ export default function FetchEventPage() {
                             className="flex justify-end md:justify-start md:hidden">
                             <button
                                 type="button"
-                                className="w-7 h-7"
+                                className="w-10 h-10"
                                 onClick={() => router.push(`${params.eventId}/edit`)}>
                                 <PencilSquareIcon className="stroke-[var(--color-foreground)] group-hover:stroke-[var(--color-foreground-accent)] w-full h-full"/>
                             </button>
