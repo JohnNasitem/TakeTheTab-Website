@@ -3,13 +3,16 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from "next/navigation";
+import { HomeIcon, UserIcon, UserGroupIcon } from '@heroicons/react/20/solid'
 
-type NarbarProps = {
-    links: { name: string; href: string }[];    // Array of objects with name and href properties
-    logo?: string;   // Optional logo URL
-}
+function Navbar() {
+    const navbarLinks = [
+        { icon: HomeIcon, href: "/" },
+        { icon: UserIcon, href: "/account" },
+        { icon: UserGroupIcon, href: "/friends" }
+    ]
+    const logo = "vercel.svg"
 
-const Navbar: React.FC<NarbarProps> = ({ links, logo}) => {
     const pathname = usePathname();
     const hideNavbar = ["/login", "/signup"].includes(pathname);
 
@@ -27,17 +30,17 @@ const Navbar: React.FC<NarbarProps> = ({ links, logo}) => {
 
                 {/* Desktop Links */}
                 <div className="hidden md:flex space-x-6">
-                    {links.map((link, index) => (
-                        <Link key={index} href={link.href} className="text-[var(--color-foreground)] hover:text-[var(--color-background)]">{link.name}</Link>
+                    {navbarLinks.map(({ icon: Icon, href }, index) => (
+                        <Link key={index} href={href} className="text-[var(--color-foreground)] hover:text-[var(--color-background)]"><Icon className='w-8 h-8'/></Link>
                     ))}
                 </div>
 
                 {/* Mobile Menu */}
                 <div className={`md:hidden bg-[var(--color-bg-alt-accent)] flex space-x-6`}>
-                        {links.map((link, index) => (
-                            <Link key={index} href={link.href} className="block text-[var(--color-foreground)] py-2 hover:text-[var(--color-background)]">{link.name}</Link>
-                        ))}
-                    </div>
+                    {navbarLinks.map(({ icon: Icon, href }, index) => (
+                        <Link key={index} href={href} className="block text-[var(--color-foreground)] py-2 hover:text-[var(--color-background)]"><Icon className='w-8 h-8'/></Link>
+                    ))}
+                </div>
             </div>
         </nav>
     );

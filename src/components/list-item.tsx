@@ -25,8 +25,8 @@ const ListItem = (itemProps: ItemProps) => {
                 itemProps.showTotal &&
                 <div
                     className='grid-cols-2 gap-2 md:gap-2 place-items-end md:text-3xl hidden md:grid'>
-                    <span className='text-green-500'>${itemProps.totalOwed}</span>
-                    <span className='text-red-500'>${itemProps.totalOwing}</span>
+                    <span className='text-[var(--color-good)]'>${itemProps.totalOwed}</span>
+                    <span className='text-[var(--color-bad)]'>${itemProps.totalOwing}</span>
                 </div>
             }
             {
@@ -38,7 +38,7 @@ const ListItem = (itemProps: ItemProps) => {
                         if (itemProps.onRemove)
                             itemProps.onRemove();
                     }}
-                    className="bg-[#F44336] rounded-lg p-2 md:p-3 hover:bg-[#C62828] w-max justify-self-end aspect-square md:text-1xl">
+                    className="bg-[var(--color-bad)] rounded-lg p-2 md:p-3 hover:bg-[var(--color-bad-accent)] w-max justify-self-end aspect-square md:text-1xl">
                     <span className="inline">&#x2A2F;</span>
                 </button>
             }

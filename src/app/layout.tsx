@@ -27,17 +27,11 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const navbarLinks = [
-    { name: "Home", href: "/" },
-    { name: "Account", href: "/account" },
-    { name: "Friends", href: "/friends" }
-  ]
-
   return (
     <html lang="en" className={`${manrope.variable} ${ubuntu.variable}`}>
       <body className="antialiased">
         <div className="text-[var(--color-foreground)] bg-[var(--color-background)] flex flex-col min-h-screen">
-          <Navbar links={navbarLinks} logo="/vercel.svg" />
+          <Navbar/>
           <div className="flex-1">
             <AppProviders>
               {children}
