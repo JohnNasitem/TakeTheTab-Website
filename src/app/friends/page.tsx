@@ -120,24 +120,31 @@ export default function FriendPage() {
 
 
     return (
-        <div className="pageSection p-3 grid grid-rows-[auto_auto_auto_1fr] gap-4">
+        <div className="pageSection p-3 grid grid-rows-[auto_1fr] gap-4">
+            {/* Add Friends Form */}
             <form 
                 onSubmit={AddFriend}
                 id="friend-search" 
-                className="grid grid-cols-[1fr_auto] bg-[var(--color-bg-accent)] rounded-3xl p-4">
+                className="grid grid-cols-[1fr_auto] bg-[var(--color-bg-accent)] rounded-3xl p-4 gap-3">
                 <h1 className="text-center text-3xl md:text-4xl font-bold col-span-2"> Your Friends </h1>
+
+                {/* Search Bar */}
                 <input
                     type="email"
                     id='friend-search-bar'
                     name="friends-email"
                     placeholder="Friend's Email"
-                    className="m-1 border-2 focus:border-3 focus:outline-none focus:ring-0 rounded-lg p-1"/>
+                    className="border-2 focus:border-3 focus:outline-none focus:ring-0 rounded-lg p-3 text-1xl md:text-2xl"/>
+
+                {/* Add Friend Button */}
                 <button
-                    className="text-[var(--color-foreground)] hover:bg-[var(--color-background)] bg-[var(--color-bg-alt-accent)] rounded-lg p-3 w-max">
+                    className="rounded-lg p-3 text-1xl md:text-2xl text-[var(--color-foreground)] hover:bg-[var(--color-background)] bg-[var(--color-bg-alt-accent)] w-max">
                     Add Friend
                 </button>
+
+                {/* Status */}
                 <div>
-                {showSearchStatus &&
+                    {showSearchStatus &&
                         <div
                             className={`text-${setSearchStatusColor}-500 col-span-2`}>
                                 {setSearchStatus}
@@ -145,10 +152,13 @@ export default function FriendPage() {
                     }
                 </div>
             </form>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 h-full">
+
+            {/* Lists */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* Friend requests list */}
                 <div
                     id="incoming-friend-requests-list" 
-                    className={`rounded-3xl bg-[var(--color-bg-alt-accent)] p-5 grid gap-3 content-start h-full w-full`}>
+                    className={`rounded-3xl bg-[var(--color-bg-alt-accent)] p-5 grid gap-3 content-start w-full`}>
                     <div className="text-center text-3xl md:text-4xl font-bold m-3"> Friend Requests </div>
                     {friendRequestItemProps.map(friendProp => (
                         <FriendRequestItem
@@ -161,42 +171,44 @@ export default function FriendPage() {
                         />
                     ))}
                 </div>
+
+                {/* Friends list */}
                 <div 
                     id="friend-list" 
-                    className={`rounded-3xl bg-[var(--color-bg-alt-accent)] p-5 grid gap-3 content-start h-full w-full`}>
+                    className={`rounded-3xl bg-[var(--color-bg-alt-accent)] p-5 grid gap-3 content-start w-full`}>
                     <div className="text-center text-3xl md:text-4xl font-bold m-3"> Friends </div>
                     {
-                    errorOccured ?
-                    <div className="text-[var(--color-bad)] flex h-full items-center justify-center">
-                        Server error occured!
-                    </div>
-                    :
-                    (
-                        hasFriends ? 
-                        <div>
-                            {friendItemProps.map(friendProp => (
-                                <FriendItem
-                                    key={friendProp.userId}
-                                    userId={friendProp.userId}
-                                    displayName={friendProp.displayName}
-                                    email={friendProp.email}
-                                    onAccept={friendProp.onAccept}
-                                    onRemove={friendProp.onRemove}
-                                />
-                            ))}
+                        errorOccured ?
+                        <div className="text-[var(--color-bad)] flex items-center justify-center">
+                            Server error occured!
                         </div>
                         :
-                        <div className="flex h-full items-center justify-center">
-                            <Image
-                                className="hidden md:inline"
-                                src="/NoFriendsMeme.jpg"
-                                alt="No Friends?"
-                                sizes="500"
-                                width={500}
-                                height={300}
-                            />
-                        </div>
-                    )
+                        (
+                            hasFriends ? 
+                            <div>
+                                {friendItemProps.map(friendProp => (
+                                    <FriendItem
+                                        key={friendProp.userId}
+                                        userId={friendProp.userId}
+                                        displayName={friendProp.displayName}
+                                        email={friendProp.email}
+                                        onAccept={friendProp.onAccept}
+                                        onRemove={friendProp.onRemove}
+                                    />
+                                ))}
+                            </div>
+                            :
+                            <div className="flex h-full items-center justify-center">
+                                <Image
+                                    className="hidden md:inline"
+                                    src="/NoFriendsMeme.jpg"
+                                    alt="No Friends?"
+                                    sizes="500"
+                                    width={500}
+                                    height={300}
+                                />
+                            </div>
+                        )
                     }
                 </div>
             </div>

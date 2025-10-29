@@ -21,13 +21,12 @@ const FriendItem = ({ userId, displayName, email, onRemove }: FriendItemProps) =
     }
 
     return (
-        <div id={`friend-item-${userId}`} 
-            className="grid grid-cols-[70fr_30fr] font-[family-name:var(--font-geist-mono)] rounded-3xl bg-[var(--color-bg-accent)] hover:bg-[var(--color-background)] p-4 md:p-5 text-2xl md:text-3xl w-full h-max">
-            <div className="flex flex-wrap items-center">
-                <span className="truncate md:truncate">{displayName}</span>
-                <span className="md:px-5 px-1 hidden md:inline">|</span>
-                <span className="w-full md:hidden"></span> {/* acts like a line break on mobile */}
-                <span className="truncate md:truncate">{email}</span>
+        <div
+            className="grid grid-cols-[1fr_auto] font-[family-name:var(--font-geist-mono)] rounded-3xl bg-[var(--color-bg-accent)] hover:bg-[var(--color-background)] p-4 md:p-5 text-2xl md:text-3xl w-full h-max">
+            <div className='pr-4 h-full flex items-center grid grid-rows-2 md:grid-rows-1 md:grid-cols-[auto_auto_auto_1fr] gap-3'>
+                <span className="truncate">{displayName}</span>
+                <span className="hidden md:inline">|</span>
+                <span className="truncate">{email}</span>
             </div>
             <button
                 onClick={async () => {
