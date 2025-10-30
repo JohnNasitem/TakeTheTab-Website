@@ -134,7 +134,7 @@ export default function FriendPage() {
                     id='friend-search-bar'
                     name="friends-email"
                     placeholder="Friend's Email"
-                    className="border-2 focus:border-3 focus:outline-none focus:ring-0 rounded-lg p-3 text-1xl md:text-2xl"/>
+                    className="bg-[var(--color-background)]  rounded-lg p-3 text-1xl md:text-2xl"/>
 
                 {/* Add Friend Button */}
                 <button
@@ -158,24 +158,26 @@ export default function FriendPage() {
                 {/* Friend requests list */}
                 <div
                     id="incoming-friend-requests-list" 
-                    className={`rounded-3xl bg-[var(--color-bg-alt-accent)] p-5 grid gap-3 content-start w-full`}>
+                    className={`rounded-3xl bg-[var(--color-bg-accent)] p-5 grid gap-3 content-start w-full`}>
                     <div className="text-center text-3xl md:text-4xl font-bold m-3"> Friend Requests </div>
-                    {friendRequestItemProps.map(friendProp => (
-                        <FriendRequestItem
-                            key={friendProp.userId}
-                            userId={friendProp.userId}
-                            displayName={friendProp.displayName}
-                            email={friendProp.email}
-                            onAccept={friendProp.onAccept}
-                            onRemove={friendProp.onRemove}
-                        />
-                    ))}
+                    <div className="grid gap-3">
+                        {friendRequestItemProps.map(friendProp => (
+                            <FriendRequestItem
+                                key={friendProp.userId}
+                                userId={friendProp.userId}
+                                displayName={friendProp.displayName}
+                                email={friendProp.email}
+                                onAccept={friendProp.onAccept}
+                                onRemove={friendProp.onRemove}
+                            />
+                        ))}
+                    </div>
                 </div>
 
                 {/* Friends list */}
                 <div 
                     id="friend-list" 
-                    className={`rounded-3xl bg-[var(--color-bg-alt-accent)] p-5 grid gap-3 content-start w-full`}>
+                    className={`rounded-3xl bg-[var(--color-bg-accent)] p-5 grid gap-3 content-start w-full`}>
                     <div className="text-center text-3xl md:text-4xl font-bold m-3"> Friends </div>
                     {
                         errorOccured ?
@@ -185,7 +187,7 @@ export default function FriendPage() {
                         :
                         (
                             hasFriends ? 
-                            <div>
+                            <div className="grid gap-3">
                                 {friendItemProps.map(friendProp => (
                                     <FriendItem
                                         key={friendProp.userId}

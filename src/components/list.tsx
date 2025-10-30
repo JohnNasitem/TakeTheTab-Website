@@ -14,21 +14,29 @@ const List = (props: ListProps) => {
     const router = useRouter();
     
     return (
-        <div className={`rounded-3xl bg-[var(--color-bg-accent)] p-5 grid gap-3 content-start h-full w-full`}>
-            <span className="text-center text-3xl md:text-4xl">{props.title}</span>
-            {props.items.map((item) => (
-                <ListItem key={item.id} {...item} />
-            ))}
-            {
-                props.allowModify &&
-                <div className='w-full h-full flex justify-center'>
-                    <button 
-                    onClick={() => router.push(props.addItemLink)}
-                    className="h-20 w-20 rounded-full text-[var(--color-good)] hover:text-[var(--color-good-accent)] text-center text-2xl md:text-3xl">
-                    <PlusCircleIcon className="w-full h-full" fill="none"/>
-                </button>
+        <div className='h-full min-h-0 rounded-3xl bg-[var(--color-bg-accent)]'>
+            <div className="p-5 grid gap-3 content-start auto-rows-auto h-full min-h-0">
+                <span className="text-center text-3xl md:text-4xl">{props.title}</span>
+                <div className='flex min-h-0 h-full w-full flex-col'>
+                    <div className="flex-1 overflow-y-auto scrollbar-custom p-3">
+                        <div className='grid gap-3'>
+                            {props.items.map((item) => (
+                                <ListItem key={item.id} {...item} />
+                            ))}
+                        </div>
+                    </div>
                 </div>
-            }
+                {
+                    props.allowModify &&
+                    <div className='w-full h-full flex justify-center'>
+                        <button 
+                            onClick={() => router.push(props.addItemLink)}
+                            className="h-20 w-20 rounded-full text-[var(--color-good)] hover:text-[var(--color-good-accent)] text-center text-2xl md:text-3xl">
+                            <PlusCircleIcon className="w-full h-full" fill="none"/>
+                        </button>
+                    </div>
+                }
+            </div>
         </div>
     )
 };

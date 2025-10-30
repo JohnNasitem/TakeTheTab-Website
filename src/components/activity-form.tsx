@@ -317,11 +317,11 @@ export default function ActivityForm(formData: ActivityFormProps) {
         <div className="pageSection flex text-1xl md:text-2xl">
             <form
                 onSubmit={handleCreateActivity}
-                className="self-center grid grid-cols-1 bg-[var(--color-bg-accent)] place-items-center rounded-lg p-10 mx-auto w-max h-max gap-3 md:gap-6">
+                className="self-center grid grid-cols-1 bg-[var(--color-bg-accent)] place-items-center rounded-lg p-10 mx-auto w-[90dvw] md:w-[50dvw] h-max gap-3 md:gap-6">
                 {/* Title */}
                 <h1 className="text-3xl md:text-4xl">{formData.title}</h1>
 
-                {/* Event Name */}
+                {/* Activity Name */}
                 <div
                     className="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-4 md:gap-8 w-full">
                     <div className="flex place-items-center h-max md:h-full w-full">
@@ -335,10 +335,10 @@ export default function ActivityForm(formData: ActivityFormProps) {
                         name="activity-name" 
                         value={activityName}
                         onChange={(e) => setActivityName(e.target.value)}
-                        className="p-3 bg-[var(--color-bg-alt-accent)] rounded-lg w-full"/>
+                        className="p-3 bg-[var(--color-background)] rounded-lg w-full"/>
                     {
                         showNameErrorMessage &&
-                        <div className="text-red-500 text-sm md:text-lg md:col-span-2 text-center">
+                        <div className="text-[var(--color-bad)] text-sm md:text-lg md:col-span-2 text-center">
                             Activity name cannot be empty.
                         </div>
                     }
@@ -388,7 +388,7 @@ export default function ActivityForm(formData: ActivityFormProps) {
                                     </div>
                                     <button 
                                         type="button"
-                                        onClick={() => removeItem(item)} className="text-red-500">
+                                        onClick={() => removeItem(item)} className="text-[var(--color-bad)]">
                                         X
                                     </button>
                                 </div>
@@ -419,7 +419,7 @@ export default function ActivityForm(formData: ActivityFormProps) {
 
                 {
                     showPayerErrorMessage &&
-                    <div className="text-red-500 text-sm md:text-lg">
+                    <div className="text-[var(--color-bad)] text-sm md:text-lg">
                         Must add at least 1 item!
                     </div>
                 }
@@ -445,7 +445,7 @@ export default function ActivityForm(formData: ActivityFormProps) {
                                     className="bg-[var(--color-bg-alt-accent)] rounded-lg p-1 md:p-3 w-full"/>
                                 {
                                     showItemNameErrorMessage &&
-                                    <div className="text-red-500 text-sm md:text-lg md:col-span-2 text-center">
+                                    <div className="text-[var(--color-bad)] text-sm md:text-lg md:col-span-2 text-center">
                                         Item name cannot be empty.
                                     </div>
                                 }
@@ -496,7 +496,7 @@ export default function ActivityForm(formData: ActivityFormProps) {
                                 </div>
                                 {
                                         showItemCostErrorMessage &&
-                                        <div className="text-red-500 text-sm md:text-lg md:col-span-2 text-center">
+                                        <div className="text-[var(--color-bad)] text-sm md:text-lg md:col-span-2 text-center">
                                             Item cost must be a positive number.
                                         </div>
                                     }
@@ -549,7 +549,7 @@ export default function ActivityForm(formData: ActivityFormProps) {
                             </div>
                             {
                                 showPayerAmountErrorMessage &&
-                                <div className="text-red-500 text-sm md:text-lg">
+                                <div className="text-[var(--color-bad)] text-sm md:text-lg">
                                     {payerAmountErrorMessage}
                                 </div>
                             }
@@ -589,7 +589,7 @@ export default function ActivityForm(formData: ActivityFormProps) {
                                         </div>
                                         <button 
                                             type="button"
-                                            onClick={() => removeItemPayer([Number(p[0]), p[1]])} className="text-red-500">
+                                            onClick={() => removeItemPayer([Number(p[0]), p[1]])} className="text-[var(--color-bad)]">
                                             X
                                         </button>
                                     </li>
@@ -597,7 +597,7 @@ export default function ActivityForm(formData: ActivityFormProps) {
                             </ul>
                             {
                                 showNoItemPayersErrorMessage &&
-                                <div className="text-red-500 text-sm md:text-lg text-center">
+                                <div className="text-[var(--color-bad)] text-sm md:text-lg text-center">
                                     Item must have payers.
                                 </div>
                             }
@@ -657,8 +657,7 @@ export default function ActivityForm(formData: ActivityFormProps) {
                                     e.preventDefault();
                                     }
                                 }}
-                                className="p-3 bg-[var(--color-bg-alt-accent)] rounded-lg w-20"/>
-                            {/* TODO: FIX space between */}
+                                className="p-3 bg-[var(--color-background)] rounded-lg w-20"/>
                             <div
                                 className={`${isGratuityPertcent ? "" : "hidden"} flex place-items-center h-full`}>
                                 %
@@ -667,7 +666,7 @@ export default function ActivityForm(formData: ActivityFormProps) {
                     </div>
                     {
                         showGratuityErrorMessage &&
-                        <div className="text-red-500 text-sm md:text-lg">
+                        <div className="text-[var(--color-bad)] text-sm md:text-lg">
                             Must add a gratuity amount!
                         </div>
                     }
@@ -696,13 +695,13 @@ export default function ActivityForm(formData: ActivityFormProps) {
                     {/* Submit Button */}
                     <button
                         type="submit"
-                        className="bg-[var(--color-bg-alt-accent)] hover:bg-[var(--color-background)] text-[var(--color-foreground)] rounded-lg p-3 w-full">
-                        {formData.isCreatingActivity ? "Create Actvity" : "Edit Activity"}
+                        className="bg-[var(--color-good)] hover:bg-[var(--color-good-accent)] text-[var(--color-foreground)] rounded-lg p-3 w-full">
+                        {formData.isCreatingActivity ? "Create" : "Save"}
                     </button>
                 </div>
                 {
                     showRequestErrorMessage &&
-                    <div className="text-red-500 text-sm md:text-lg text-center ">
+                    <div className="text-[var(--color-bad)] text-sm md:text-lg text-center ">
                         {requestErrorMessage}
                     </div>
                 }

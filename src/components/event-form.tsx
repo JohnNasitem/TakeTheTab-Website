@@ -145,7 +145,7 @@ export default function EventForm(eventFormData: EventForm) {
         <div className="pageSection flex text-1xl md:text-2xl">
             <form
                 onSubmit={handleCreateEvent}
-                className="self-center grid grid-cols-1 md:grid-cols-[auto_1fr] back bg-[var(--color-bg-accent)] place-items-center rounded-lg p-10 mx-auto w-max h-max gap-3 md:gap-6">
+                className=" self-center grid grid-cols-1 md:grid-cols-[auto_1fr] bg-[var(--color-bg-accent)] place-items-center rounded-lg p-10 mx-auto w-[90dvw] md:w-[50dvw] h-max gap-3 md:gap-6">
                 {/* Title */}
                 <h1 className="text-3xl md:text-4xl md:col-span-2">{eventFormData.title}</h1>
 
@@ -161,10 +161,10 @@ export default function EventForm(eventFormData: EventForm) {
                     name="event-name" 
                     value={eventName}
                     onChange={(e) => setEventName(e.target.value)}
-                    className="p-3 bg-[var(--color-bg-alt-accent)] rounded-lg w-full md:col-span-1"/>
+                    className="p-3 bg-[var(--color-background)] rounded-lg w-full md:col-span-1"/>
                 {
                     showNameErrorMessage &&
-                    <div className="text-red-500 text-sm md:text-lg md:col-span-2">
+                    <div className="text-[var(--color-bad)] text-sm md:text-lg md:col-span-2">
                         Event name cannot be empty.
                     </div>
                 }
@@ -177,7 +177,7 @@ export default function EventForm(eventFormData: EventForm) {
                 </div>
                 <button
                     type="button"
-                    className="bg-[var(--color-bg-alt-accent)] hover:bg-[var(--color-background)] text-[var(--color-foreground)] rounded-lg p-3 w-full h-full"
+                    className="bg-[var(--color-background)] hover:bg-[var(--color-bg-alt-accent)] text-[var(--color-foreground)] rounded-lg p-3 w-full h-full"
                     onClick={() => setIsOpen(true)}>
                    {selectedDate != undefined ? selectedDate.toLocaleDateString("en-US", {
                         month: "short",
@@ -187,7 +187,7 @@ export default function EventForm(eventFormData: EventForm) {
                 </button>
                 {
                     showDateErrorMessage &&
-                    <div className="text-red-500 text-sm md:text-lg md:col-span-2">
+                    <div className="text-[var(--color-bad)] text-sm md:text-lg md:col-span-2">
                         Event date cannot be empty.
                     </div>
                 }
@@ -195,12 +195,26 @@ export default function EventForm(eventFormData: EventForm) {
                 {/* Add item dialog */}
                 <Dialog open={isOpen} onClose={() => setIsOpen(false)} className="relative z-50">
                     <div className="fixed inset-0 flex w-screen items-center justify-center p-4 bg-black/50">
-                    <DialogPanel className="max-w-[80dvh] w-max space-y-4 border bg-[var(--color-bg-accent)] rounded-lg p-5 md:p-12">
+                    <DialogPanel className="max-w-[80dvh] w-max space-y-4 bg-[var(--color-bg-accent)] rounded-lg p-5 md:p-12">
                         <DialogTitle className="font-bold text-center text-3xl md:text-4x1">Select Event Date</DialogTitle>
-                        <DayPicker mode="single" selected={selectedDate} onSelect={(date) => {
-                            setIsOpen(false);
-                            setSelectedDate(date);
-                        }} />
+                        <DayPicker 
+                            className="rdp-root"
+                            mode="single" 
+                            selected={selectedDate} 
+                            modifiersStyles={{
+                                selected: {
+                                    backgroundColor: 'var(--color-bg-accent)',
+                                    color: 'var(--color-foreground)',
+                                },
+                                today: {
+                                    backgroundColor: 'var(--color-bg-accent)',
+                                    color: 'var(--color-foreground)', 
+                                },
+                            }}
+                            onSelect={(date) => {
+                                setIsOpen(false);
+                                setSelectedDate(date);
+                            }}/>
                     </DialogPanel>
                     </div>
                 </Dialog>
@@ -223,13 +237,13 @@ export default function EventForm(eventFormData: EventForm) {
                 {/* Selected participants */}
                 <ul 
                     id="create-event-participants-list"
-                    className="md:col-span-2 grid grid-cols-1 gap-2 border-2 w-full rounded-lg p-3 bg-[var(--color-bg-alt-accent)] max-h-[20dvh] h-[20dvh] overflow-y-auto content-start">
+                    className="md:col-span-2 grid grid-cols-1 gap-2 w-full rounded-lg p-3 bg-[var(--color-background)] max-h-[20dvh] h-[20dvh] overflow-y-auto content-start">
                     {participants && Object.entries(participants)
                         .sort((a, b) => a[1][0].localeCompare(b[1][0]))
                         .map(p => (
-                        <li key={p[0]} className="bg-[var(--color-fg-accent)] text-[var(--color-bg-accent)] px-3 py-1 rounded items-center gap-1 grid grid-cols-[1fr_auto] h-max">
+                        <li key={p[0]} className="rounded-lg bg-[var(--color-bg-alt-accent)] text-[var(--color-fg-accent)] px-3 py-1 rounded items-center gap-1 grid grid-cols-[1fr_auto] h-max">
                             <div>
-                                {p[1][0]} | {p[1][1]}
+                                <span className="truncate w-[50dvw] md:w-[40dvw] inline-block">{p[1][0]} | {p[1][1]}</span>
                             </div>
                             <button 
                                 type="button"
@@ -240,35 +254,32 @@ export default function EventForm(eventFormData: EventForm) {
                                         alert("Participant must be removed from all activity items first.")
                                     else
                                         removeParticipant([Number(p[0]), p[1]]);
-                                }} className="text-red-500">
-                                X
+                                }} className="bg-[var(--color-bad)] rounded-lg p-1 hover:bg-[var(--color-bad-accent)] w-max justify-self-end aspect-square md:text-1xl">
+                                ✖
                             </button>
                         </li>
                     ))}
                 </ul>
                 
                 <div
-                    className={`${eventFormData.isCreatingEvent ? "" : "grid grid-cols-2 gap-4"} md:col-span-2 w-full`}>
+                    className="grid grid-cols-2 gap-4 md:col-span-2 w-full">
                     {/* Cancel button */}
-                    {
-                        !eventFormData.isCreatingEvent && 
-                        <button
-                            type="button"
-                            onClick={() => router.push(`/event/${params.eventId}`)}
-                            className="bg-[var(--color-bg-alt-accent)] hover:bg-[var(--color-background)] text-[var(--color-foreground)] rounded-lg p-3 w-full">
-                            Cancel
-                        </button>
-                    }
+                    <button
+                        type="button"
+                        onClick={() => router.push(`/event/${params.eventId}`)}
+                        className="bg-[var(--color-bad)] hover:bg-[var(--color-bad-accent)] text-[var(--color-foreground)] rounded-lg p-3 w-full">
+                        Cancel
+                    </button>
                     {/* Submit/Edit Button */}
                     <button
                         type="submit"
                         className="bg-[var(--color-good)] hover:bg-[var(--color-good-accent)] text-[var(--color-foreground)] rounded-lg p-3 w-full">
-                        {eventFormData.isCreatingEvent ? "Create Event" : "Save Changes"}
+                        {eventFormData.isCreatingEvent ? "Create" : "Save"}
                     </button>
                 </div>
                 {
                     showRequestErrorMessage &&
-                    <div className="text-red-500 text-sm md:text-lg md:col-span-2 text-wrap">
+                    <div className="text-[var(--color-bad)] text-sm md:text-lg md:col-span-2 text-wrap">
                         {requestErrorMessage}
                     </div>
                 }

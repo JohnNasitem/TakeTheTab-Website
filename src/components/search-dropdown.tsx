@@ -45,25 +45,27 @@ export default function SearchDropdown<T>({
       <input
         type="text"
         placeholder={placeholder}
-        className="border rounded-lg px-3 py-2 w-full focus:outline-none h-full"
+        className="rounded-lg px-3 py-2 w-full focus:outline-none h-full bg-[var(--color-background)]"
         value={searchValue}
         onFocus={() => setIsFocused(true)}
         onChange={(e) => setSearchValue(e.target.value)}
       />
 
       {isFocused && filtered.length > 0 && (
-        <ul className="absolute top-full left-0 right-0 border rounded overflow-y-auto bg-[var(--color-background)] shadow-lg max-h-[20dvh] h-max z-10">
+        <ul className="absolute top-full left-0 right-0 mt-2 border text-[var(--color-bg-alt-accent)] rounded overflow-y-auto bg-[var(--color-bg-accent)] max-h-[20dvh] h-max z-10">
           {filtered.map(([id, item]) => (
             <li
               key={id}
-              className="px-3 py-2 hover:bg-[var(--color-bg-accent)] cursor-pointer"
+              className="px-3 py-2 hover:bg-[var(--color-bg-alt-accent)] text-[var(--color-foreground)] cursor-pointer"
               onMouseDown={() => {
                 onSelect?.(id, item);
                 setSearchValue("");
                 setIsFocused(false);
               }}
             >
-              {displayFn ? displayFn(item) : String(item)}
+              <div className="truncate w-[65dvw] md:w-[45dvw] inline-block">
+                {displayFn ? displayFn(item) : String(item)}
+              </div>
             </li>
           ))}
         </ul>

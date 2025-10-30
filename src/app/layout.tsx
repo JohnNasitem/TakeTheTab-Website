@@ -31,7 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${manrope.variable} ${ubuntu.variable}`}>
       <body className="antialiased">
-        <div className="text-[var(--color-foreground)] bg-[var(--color-background)] flex flex-col min-h-screen">
+        <div className="text-[var(--color-foreground)] bg-[var(--color-background)] flex flex-col max-h-dvh">
           <Navbar/>
           <div className="flex-1">
             <AppProviders>

@@ -45,11 +45,11 @@ export default function Home() {
   }, [fetchUser]);
 
   return (
-    <div className="pageSection p-3 grid grid-rows-[auto_auto_1fr] md:grid-rows-[auto_1fr] grid-cols-2 md:grid-cols-[66fr_17fr_17fr] gap-4">
+    <div className="pageSection p-3 grid grid-rows-[auto_auto_1fr] md:grid-rows-[auto_1fr] grid-cols-2 md:grid-cols-[66fr_17fr_17fr] gap-4 h-full min-h-0">
       {/* Display name */}
       <div className="text-3xl md:text-7xl col-span-2 md:col-span-1 w-full gap-4 grid-rows-[1fr_auto] md:grid-rows-1 bg-[var(--color-bg-accent)] rounded-3xl p-5">
-        <h1 className="flex justify-center md:justify-start md:items-center h-full font-bold text-ellipsis truncate max-w-full">
-          {displayName ?? ""} 
+        <h1 className="flex justify-center justify-start md:items-center h-full font-bold">
+          <span className="truncate w-full md:max-w-[60dvw] max-w-[80dvw] inline-block">{displayName ?? ""} </span>
         </h1>
       </div>
 
@@ -72,7 +72,7 @@ export default function Home() {
               ${amountOwing ?? 0}
           </div>
       </div>
-      <div className="md:col-span-3 col-span-2">
+      <div className="md:col-span-3 col-span-2 h-full min-h-0">
         <List title="Events" items={items} addItemLink="/event/create" addItemText="Add Event" allowModify={true}/>
       </div>
     </div>

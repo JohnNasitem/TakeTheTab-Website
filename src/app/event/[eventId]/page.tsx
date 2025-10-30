@@ -178,14 +178,14 @@ export default function FetchEventPage() {
                         className="p-6 rounded-3xl bg-[var(--color-bg-alt-accent)] hover:bg-[var(--color-background)] md:p-5 text-2xl md:text-3xl w-full h-max" 
                         defaultOpen={false}>
                         <DisclosureButton className="group flex w-full items-center justify-between">
-                            <span className="">
+                            <span className="truncate w-[70dvw] md:w-[25dvw] inline-block text-left">
                                 {participant.participantData.displayName}
                             </span>
                             <ChevronDownIcon className="size-5 fill-white/60 group-data-hover:fill-white/50 group-data-open:rotate-180" />
                         </DisclosureButton>
                         <DisclosurePanel className="mt-2">
                             <div>
-                                <div className="text-ellipsis truncate w-full md:max-w-[20dvw] max-w-[70dvw]">
+                                <div className="text-ellipsis truncate w-full md:max-w-[25dvw] max-w-[70dvw]">
                                     Email: {participant.participantData.email}
                                 </div>
                                 {

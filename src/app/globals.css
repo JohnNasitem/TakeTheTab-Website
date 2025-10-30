@@ -1,7 +1,14 @@
 @import "tailwindcss";
+@import "react-day-picker/style.css";
+
+/* Not a recognized rule but does work */
+@plugin 'tailwind-scrollbar' {
+    nocompatible: true;
+    preferredStrategy: 'pseudoelements';
+}
 
 :root {
-  --background: #16161D;
+  --background: #141416;
   --foreground: #DCD7BA;
 
   --color-background: #16161D;
@@ -38,7 +45,29 @@ html {
 
 /*Scroll down to accomodate for the nav bar*/
 .pageSection  {
-  scroll-margin-top: 60px;
-  min-height: calc(100vh - 60px);
-  max-height: calc(100vh - 60px);
+  scroll-margin-top: 90px;
+  height: calc(100vh - 90px);
+}
+
+.scrollbar-custom::-webkit-scrollbar {
+  width: 12px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb {
+  background-color: var(--color-bg-alt-accent);
+  border-radius: 9999px;
+  background-clip: content-box;
+}
+
+.scrollbar-custom::-webkit-scrollbar-track {
+  background: var(--color-background);
+  border-radius: 9999px;
+}
+
+/* Overriding day picker arrow buttons and selected circle */
+.rdp-chevron polygon {
+  fill: var(--color-foreground);
+}
+.rdp-day.rdp-selected .rdp-day_button {
+  border: 2px solid var(--color-foreground);
 }

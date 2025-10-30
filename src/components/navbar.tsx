@@ -24,7 +24,7 @@ function Navbar() {
                 {/* Only add logo if one is supplied */}
                 {logo && (
                     <Link href ="/" className="flex items-start pl-5 md:pl-10">
-                        <Image width={100} height={100} src={logo} alt="Logo" className="h-20 w-20" />
+                        <Image width={100} height={100} src={logo} alt="Logo" className="h-10 w-10 md:h-20 md:w-20" />
                     </Link>
                 )}
 

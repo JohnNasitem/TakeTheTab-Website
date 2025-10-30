@@ -17,32 +17,29 @@ const FriendRequestItem = ({ userId, displayName, email, onAccept, onRemove  }: 
     }
 
     return (
-        <div id={`friend-item-${userId}`} 
-            className="grid grid-cols-[1fr_auto] bg-[var(--color-bg-accent)] rounded-lg m-3">
-            <div className="flex flex-wrap items-center p-3">
-                <span className="truncate md:truncate">{displayName}</span>
-                <span className="md:px-5 px-1 hidden md:inline">|</span>
-                <span className="w-full md:hidden"></span> {/* acts like a line break on mobile */}
-                <span className="truncate md:truncate">{email}</span>
+        <div
+            className="grid grid-cols-[1fr_auto] font-[family-name:var(--font-geist-mono)] rounded-3xl bg-[var(--color-bg-alt-accent)] hover:bg-[var(--color-background)] p-4 md:p-5 text-2xl md:text-3xl w-full h-max">
+            <div className='pr-4 h-full flex items-center grid grid-rows-2 md:grid-rows-1 md:grid-cols-[auto_auto_auto_1fr] gap-3'>
+                <span className="truncate">{displayName}</span>
+                <span className="hidden md:inline">|</span>
+                <span className="truncate">{email}</span>
             </div>
-            <div className="grid grid-cols-2">
+            <div className="grid grid-cols-2 gap-3">
                 <button
                     onClick={() => {
                         respondToRequest(true);
                         onAccept();
                     }}
-                    className="bg-[#4CAF50] rounded-lg p-0 md:pt-3 md:pb-3 md:pl-6 md:pr-6 hover:bg-[#2E7D32] w-max justify-self-end m-3 aspect-square md:aspect-auto">
-                    <span className="inline md:hidden">✔</span>
-                    <span className="hidden md:inline">Accept</span>
+                    className="bg-[var(--color-good)] rounded-lg p-2 md:p-3 hover:bg-[var(--color-good-accent)] w-max justify-self-end aspect-square md:text-1xl">
+                    <span>✔</span>
                 </button>
                 <button
                     onClick={() => {
                         respondToRequest(false);
                         onRemove();
                     }}
-                    className="bg-[#F44336] rounded-lg p-0 md:pt-3 md:pb-3 md:pl-6 md:pr-6 hover:bg-[#C62828] w-max justify-self-end mt-3 mr-3 mb-3 aspect-square md:aspect-auto">
-                    <span className="inline md:hidden">✖</span>
-                    <span className="hidden md:inline">Decline</span>
+                    className="bg-[var(--color-bad)] rounded-lg p-2 md:p-3 hover:bg-[var(--color-bad-accent)] w-max justify-self-end aspect-square md:text-1xl">
+                    <span>✖</span>
                 </button>
             </div>
         </div>
