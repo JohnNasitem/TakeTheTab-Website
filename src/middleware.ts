@@ -4,6 +4,11 @@ import jwt from 'jsonwebtoken'
 
 const publicRoutes = ['/login', '/signup']
 
+interface GenericResponse {
+  actionSuccess: boolean;
+  errorMessage?: string | null;
+}
+
 export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname
   const isPublic = publicRoutes.includes(pathname)
@@ -54,14 +59,11 @@ async function validateTokens(accessToken?: string, refreshToken?: string): Prom
       },
     })
 
-    if (!res.ok) return false
-
-    const data = await res.json()
-    // Optionally, you can update cookies here using NextResponse if your backend sends new access tokens
-
-    console.log(data);
-
-    return true
+    if (!res.ok) 
+      return false
+    
+    const data = await res.json() as GenericResponse
+    return data.actionSuccess
   } catch {
     return false
   }
