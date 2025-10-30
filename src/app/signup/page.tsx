@@ -50,7 +50,7 @@ export default function SignUpPage() {
     };
 
     return (
-        <div className="pageSection flex text-1xl md:text-2xl">
+        <div className="h-screen flex text-1xl md:text-2xl">
             <form onSubmit={handleSignup} className=" self-center grid grid-rows-[repeat(8,_auto)] back bg-[var(--color-bg-accent)] place-items-center rounded-lg p-10 mx-auto w-max h-max gap-3 md:gap-6">
                 <h1 className="text-3xl md:text-4xl">Sign up</h1>
                 <div>
