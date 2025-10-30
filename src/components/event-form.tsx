@@ -266,7 +266,7 @@ export default function EventForm(eventFormData: EventForm) {
                     {/* Cancel button */}
                     <button
                         type="button"
-                        onClick={() => router.push(`/event/${params.eventId}`)}
+                        onClick={() => router.push(`/`)}
                         className="bg-[var(--color-bad)] hover:bg-[var(--color-bad-accent)] text-[var(--color-foreground)] rounded-lg p-3 w-full">
                         Cancel
                     </button>
