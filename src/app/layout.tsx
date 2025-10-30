@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Manrope, Ubuntu } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar";
-import { AppProviders } from "@/components/providers/app-providers";
 
 export const metadata: Metadata = {
   title: "Take The Tab",
@@ -34,9 +33,7 @@ export default function RootLayout({
         <div className="text-[var(--color-foreground)] bg-[var(--color-background)] flex flex-col max-h-dvh">
           <Navbar/>
           <div className="flex-1">
-            <AppProviders>
-              {children}
-            </AppProviders>
+            {children}
           </div>
         </div>
       </body>
