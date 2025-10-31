@@ -92,15 +92,15 @@ export default function FetchActivityPage() {
                     <Disclosure 
                         key={item.itemId}
                         as="div" 
-                        className="p-6 rounded-3xl bg-[var(--color-bg-alt-accent)] hover:bg-[var(--color-background)] md:p-5 text-2xl md:text-3xl w-full h-max" 
+                        className="rounded-3xl bg-[var(--color-bg-alt-accent)] hover:bg-[var(--color-background)] text-2xl md:text-3xl w-full h-max group" 
                         defaultOpen={false}>
-                        <DisclosureButton className="group flex w-full items-center justify-between">
+                        <DisclosureButton className="group flex w-full items-center justify-between p-6 pb-0 md:p-5 md:group-data-[headlessui-state=open]:pb-0">
                             <span className="">
                                 {item.itemName}
                             </span>
                             <ChevronDownIcon className="size-5 fill-white/60 group-data-hover:fill-white/50 group-data-open:rotate-180" />
                         </DisclosureButton>
-                        <DisclosurePanel className="mt-2">
+                        <DisclosurePanel className="mt-2 p-6 pt-0 md:p-5 md:pt-0">
                             <div>
                                 <div className="text-ellipsis truncate w-full md:max-w-[20dvw] max-w-[70dvw]">
                                     Subtotal: ${item.itemCost}
@@ -128,15 +128,15 @@ export default function FetchActivityPage() {
                 }
                 <Disclosure 
                     as="div" 
-                    className="p-6 rounded-3xl bg-[var(--color-action)] hover:bg-[var(--color-action-accent)] md:p-5 text-2xl md:text-3xl w-full h-max" 
+                    className="rounded-3xl bg-[var(--color-action)] hover:bg-[var(--color-action-accent)] text-2xl md:text-3xl w-full h-max group" 
                     defaultOpen={false}>
-                    <DisclosureButton className="group flex w-full items-center justify-between">
+                    <DisclosureButton className="group flex w-full items-center justify-between p-6 pb-0 md:p-5 md:group-data-[headlessui-state=open]:pb-0">
                         <span className="">
                             Grand Total: ${getActivityGrandTotal().toFixed(2)}
                         </span>
                         <ChevronDownIcon className="size-5 fill-white/60 group-data-hover:fill-white/50 group-data-open:rotate-180" />
                     </DisclosureButton>
-                    <DisclosurePanel className="mt-2">
+                    <DisclosurePanel className="mt-2 p-6 pt-0 md:p-5 md:pt-0">
                         <div>
                             <div className="text-ellipsis truncate w-full md:max-w-[50dvw] max-w-[70dvw]">
                                 Activity Subtotal: ${(activity?.activitySubtotal ?? 0).toFixed(2)}
@@ -162,15 +162,15 @@ export default function FetchActivityPage() {
                     <Disclosure 
                         key={payer.payerId}
                         as="div" 
-                        className="p-6 rounded-3xl bg-[var(--color-bg-alt-accent)] hover:bg-[var(--color-background)] md:p-5 text-2xl md:text-3xl w-full h-max" 
+                        className="rounded-3xl bg-[var(--color-bg-alt-accent)] hover:bg-[var(--color-background)] text-2xl md:text-3xl w-full h-max group" 
                         defaultOpen={false}>
-                        <DisclosureButton className="group flex w-full items-center justify-between">
+                        <DisclosureButton className="group flex w-full items-center justify-between p-6 pb-0 md:p-5 md:group-data-[headlessui-state=open]:pb-0">
                             <span className="">
                                 {payer.payerName}
                             </span>
                             <ChevronDownIcon className="size-5 fill-white/60 group-data-hover:fill-white/50 group-data-open:rotate-180" />
                         </DisclosureButton>
-                        <DisclosurePanel className="mt-2">
+                        <DisclosurePanel className="mt-2 p-6 pt-0 md:p-5 md:pt-0">
                             <div>
                                 <div className="text-ellipsis truncate w-full md:max-w-[20dvw] max-w-[70dvw]">
                                     Email: {payer.payerEmail}

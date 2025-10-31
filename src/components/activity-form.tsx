@@ -6,7 +6,8 @@ import { UserApiService } from "@/components/server-api-serivces/user-api-servic
 import { ActivityApiService } from "@/components/server-api-serivces/activity-api-service"
 import { useRouter, useParams } from "next/navigation";
 import ToggleSelect from '@/components/toggle-select'
-import { Dialog, DialogPanel, DialogTitle } from '@headlessui/react'
+import { Dialog, DialogPanel, DialogTitle, Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react'
+import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import SearchDropdown from "@/components/search-dropdown"
 import { FetchEventResponseParticipant } from '@/interfaces/server-responses'
 
@@ -314,7 +315,7 @@ export default function ActivityForm(formData: ActivityFormProps) {
     }
 
     return (
-        <div className="pageSection flex text-1xl md:text-2xl">
+        <div className="pageSection flex text-1xl md:text-2xl bg-[var(--color-background)]">
             <form
                 onSubmit={handleCreateActivity}
                 className="self-center grid grid-cols-1 bg-[var(--color-bg-accent)] place-items-center rounded-lg p-10 mx-auto w-[90dvw] md:w-[50dvw] h-max gap-3 md:gap-6">
@@ -378,41 +379,83 @@ export default function ActivityForm(formData: ActivityFormProps) {
                     </div>
                     {items.map(
                         (item, index) => (
-                            <div 
+                            <Disclosure 
                                 key={index}
-                                className="grid grid-cols-1 p-3 rounded-lg gap-2 border-2 w-full mt-4">
-                                <div
-                                    className="grid grid-cols-[1fr_auto]">
-                                    <div className="w-full truncate">
-                                        Item: {item.itemName}
-                                    </div>
-                                    <button 
-                                        type="button"
-                                        onClick={() => removeItem(item)} className="text-[var(--color-bad)]">
-                                        X
-                                    </button>
-                                </div>
-                                <div className="w-full">
-                                    Cost: ${item.itemCost}
-                                </div>
-                                <div className="w-full">
-                                    Payers:
-                                </div>
-                                {Object.entries(item.itemOwers).map(
-                                    (payer, index) => (
-                                        <div
-                                            key={index}
-                                            className="grid grid-cols-[auto_1fr] gap-1">
-                                            <div>
-                                                {payer[1][0]} | {payer[1][1]}:
-                                            </div>
-                                            <div>
-                                                ${payer[1][2]}
-                                            </div>
+                                as="div" 
+                                className="rounded-3xl bg-[var(--color-background)] hover:bg-[var(--color-bg-alt-accent)] w-full h-max group" 
+                                defaultOpen={false}>
+                                <DisclosureButton className="group flex w-full items-center justify-between p-6 pb-0 md:p-5 md:group-data-[headlessui-state=open]:pb-0">
+                                    <span className="truncate w-[70dvw] md:w-[25dvw] inline-block text-left">
+                                        {item.itemName}
+                                    </span>
+                                    <ChevronDownIcon className="size-5 fill-white/60 group-data-hover:fill-white/50 group-data-open:rotate-180" />
+                                </DisclosureButton>
+                                <DisclosurePanel className="mt-2 p-6 pt-0 md:p-5 md:pt-0">
+                                    <div>
+                                        <div className="w-full grid grid-cols-[1fr_auto]">
+                                            <span>Cost: ${item.itemCost}</span>
+                                            <button 
+                                                type="button"
+                                                onClick={() => removeItem(item)} className="text-[var(--color-bad)]">
+                                                ✖
+                                            </button>
                                         </div>
-                                    )
-                                )}
-                            </div>
+                                        <div className="w-full">
+                                            Payers:
+                                        </div>
+                                        {Object.entries(item.itemOwers).map(
+                                            (payer, index) => (
+                                                <div
+                                                    key={index}
+                                                    className="grid grid-cols-[auto_1fr] gap-1">
+                                                    <div>
+                                                        {payer[1][0]} | {payer[1][1]}:
+                                                    </div>
+                                                    <div>
+                                                        ${payer[1][2]}
+                                                    </div>
+                                                </div>
+                                            )
+                                        )}
+                                    </div>
+                                </DisclosurePanel>
+                            </Disclosure>
+
+                            // <div 
+                            //     key={index}
+                            //     className="grid grid-cols-1 p-3 rounded-lg gap-2 bg-[var(--color-background)] w-full mt-4">
+                            //     <div
+                            //         className="grid grid-cols-[1fr_auto]">
+                            //         <div className="w-full truncate">
+                            //             Item: {item.itemName}
+                            //         </div>
+                            //         <button 
+                            //             type="button"
+                            //             onClick={() => removeItem(item)} className="text-[var(--color-bad)]">
+                            //             ✖
+                            //         </button>
+                            //     </div>
+                            //     <div className="w-full">
+                            //         Cost: ${item.itemCost}
+                            //     </div>
+                            //     <div className="w-full">
+                            //         Payers:
+                            //     </div>
+                            //     {Object.entries(item.itemOwers).map(
+                            //         (payer, index) => (
+                            //             <div
+                            //                 key={index}
+                            //                 className="grid grid-cols-[auto_1fr] gap-1">
+                            //                 <div>
+                            //                     {payer[1][0]} | {payer[1][1]}:
+                            //                 </div>
+                            //                 <div>
+                            //                     ${payer[1][2]}
+                            //                 </div>
+                            //             </div>
+                            //         )
+                            //     )}
+                            // </div>
                         )
                     )}
                 </div>
