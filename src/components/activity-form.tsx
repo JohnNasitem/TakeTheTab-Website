@@ -318,410 +318,377 @@ export default function ActivityForm(formData: ActivityFormProps) {
         <div className="pageSection flex text-1xl md:text-2xl bg-[var(--color-background)]">
             <form
                 onSubmit={handleCreateActivity}
-                className="self-center grid grid-cols-1 bg-[var(--color-bg-accent)] place-items-center rounded-lg p-10 mx-auto w-[90dvw] md:w-[50dvw] h-max gap-3 md:gap-6">
+                className="self-center grid grid-cols-1 bg-[var(--color-bg-accent)] place-items-center rounded-3xl p-10 mx-auto w-[90dvw] md:w-[70dvw] h-max gap-3 md:gap-6">
                 {/* Title */}
                 <h1 className="text-3xl md:text-4xl">{formData.title}</h1>
 
-                {/* Activity Name */}
-                <div
-                    className="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-4 md:gap-8 w-full">
-                    <div className="flex place-items-center h-max md:h-full w-full">
-                        <label htmlFor="create-activity-activity-name">
-                            Activity Name:
-                        </label>
-                    </div>
-                    <input 
-                        type="text" 
-                        id="create-activity-activity-name" 
-                        name="activity-name" 
-                        value={activityName}
-                        onChange={(e) => setActivityName(e.target.value)}
-                        className="p-3 bg-[var(--color-background)] rounded-lg w-full"/>
-                    {
-                        showNameErrorMessage &&
-                        <div className="text-[var(--color-bad)] text-sm md:text-lg md:col-span-2 text-center">
-                            Activity name cannot be empty.
-                        </div>
-                    }
-                </div>
-
-                <div className="w-full">
-                    <hr className="border-t border-[var(--color-border)] my-2" />
-                </div>
-
-                {/* Add item */}
-                <div 
-                    className="w-full grid grid-cols-1 gap-2">
-                    <div
-                        className="grid w-full grid-cols-[1fr_auto]">
-                        <div className="flex place-items-center h-max md:h-full w-full">
-                            Items:
-                        </div>
-                        <button 
-                            type="button" 
-                            className="bg-[var(--color-bg-alt-accent)] p-3 rounded-lg"
-                            onClick={() => {
-                            // Reset add item dialog state
-                            setSplitEvenly(true);
-                            setItemPeopleOwing({});
-                            setShowPayerAmountErrorMessage(false);
-                            setAvailableItemParticipants({
-                                ...participants,
-                                [currentUser[0]]: [currentUser[1], currentUser[2]] as [string, string]
-                            });
-                            setItemPayerParticipants([]);
-                            
-                            // Open dialog
-                            setIsOpen(true)
-                        }}>
-                            Add Item ✚
-                        </button>
-                    </div>
-                    {items.map(
-                        (item, index) => (
-                            <Disclosure 
-                                key={index}
-                                as="div" 
-                                className="rounded-3xl bg-[var(--color-background)] hover:bg-[var(--color-bg-alt-accent)] w-full h-max group" 
-                                defaultOpen={false}>
-                                <DisclosureButton className="group flex w-full items-center justify-between p-6 pb-0 md:p-5 md:group-data-[headlessui-state=open]:pb-0">
-                                    <span className="truncate w-[70dvw] md:w-[25dvw] inline-block text-left">
-                                        {item.itemName}
-                                    </span>
-                                    <ChevronDownIcon className="size-5 fill-white/60 group-data-hover:fill-white/50 group-data-open:rotate-180" />
-                                </DisclosureButton>
-                                <DisclosurePanel className="mt-2 p-6 pt-0 md:p-5 md:pt-0">
-                                    <div>
-                                        <div className="w-full grid grid-cols-[1fr_auto]">
-                                            <span>Cost: ${item.itemCost}</span>
-                                            <button 
-                                                type="button"
-                                                onClick={() => removeItem(item)} className="text-[var(--color-bad)]">
-                                                ✖
-                                            </button>
-                                        </div>
-                                        <div className="w-full">
-                                            Payers:
-                                        </div>
-                                        {Object.entries(item.itemOwers).map(
-                                            (payer, index) => (
-                                                <div
-                                                    key={index}
-                                                    className="grid grid-cols-[auto_1fr] gap-1">
-                                                    <div>
-                                                        {payer[1][0]} | {payer[1][1]}:
-                                                    </div>
-                                                    <div>
-                                                        ${payer[1][2]}
-                                                    </div>
-                                                </div>
-                                            )
-                                        )}
-                                    </div>
-                                </DisclosurePanel>
-                            </Disclosure>
-
-                            // <div 
-                            //     key={index}
-                            //     className="grid grid-cols-1 p-3 rounded-lg gap-2 bg-[var(--color-background)] w-full mt-4">
-                            //     <div
-                            //         className="grid grid-cols-[1fr_auto]">
-                            //         <div className="w-full truncate">
-                            //             Item: {item.itemName}
-                            //         </div>
-                            //         <button 
-                            //             type="button"
-                            //             onClick={() => removeItem(item)} className="text-[var(--color-bad)]">
-                            //             ✖
-                            //         </button>
-                            //     </div>
-                            //     <div className="w-full">
-                            //         Cost: ${item.itemCost}
-                            //     </div>
-                            //     <div className="w-full">
-                            //         Payers:
-                            //     </div>
-                            //     {Object.entries(item.itemOwers).map(
-                            //         (payer, index) => (
-                            //             <div
-                            //                 key={index}
-                            //                 className="grid grid-cols-[auto_1fr] gap-1">
-                            //                 <div>
-                            //                     {payer[1][0]} | {payer[1][1]}:
-                            //                 </div>
-                            //                 <div>
-                            //                     ${payer[1][2]}
-                            //                 </div>
-                            //             </div>
-                            //         )
-                            //     )}
-                            // </div>
-                        )
-                    )}
-                </div>
-
-                {
-                    showPayerErrorMessage &&
-                    <div className="text-[var(--color-bad)] text-sm md:text-lg">
-                        Must add at least 1 item!
-                    </div>
-                }
-
-                {/* Add item dialog */}
-                <Dialog open={isOpen} onClose={() => setIsOpen(false)} className="relative z-50">
-                    <div className="fixed inset-0 flex w-screen items-center justify-center p-4 bg-black/50">
-                    <DialogPanel className="max-w-[80dvh] w-full space-y-4 border bg-[var(--color-bg-accent)] rounded-lg p-5 md:p-12">
-                        <DialogTitle className="font-bold text-center text-3xl md:text-4x1">Add Item</DialogTitle>
-                        <form
-                            onSubmit={handleAddItem}
-                            className="text-1xl md:text-3x1">
-                            {/* Item name */}
-                            <div className="grid grid-cols-[auto_1fr] gap-2 md:gap-4 w-full mb-4">
-                                <div
-                                    className="flex place-items-center h-full w-full">
-                                    <label htmlFor="new-activity-item">Item Name:</label>
+                <div className="grid grid-cols-[49fr_51fr] w-full gap-4">
+                    {/* Activity fields */}
+                    <div className="flex">
+                        <div
+                            className="self-center grid grid-cols-1 justify-center gap-2 w-full h-max">
+                            {/* Activity Name */}
+                            <div
+                                className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+                                <div className="flex place-items-center h-max md:h-full w-full">
+                                    <label htmlFor="create-activity-activity-name" className="text-center w-full">
+                                        Activity Name:
+                                    </label>
                                 </div>
                                 <input 
                                     type="text" 
-                                    id="new-activity-item"
-                                    name="item"
-                                    className="bg-[var(--color-background)] rounded-lg p-1 md:p-3 w-full"/>
+                                    id="create-activity-activity-name" 
+                                    name="activity-name" 
+                                    value={activityName}
+                                    onChange={(e) => setActivityName(e.target.value)}
+                                    className="p-3 bg-[var(--color-background)] rounded-lg w-full"/>
                                 {
-                                    showItemNameErrorMessage &&
+                                    showNameErrorMessage &&
                                     <div className="text-[var(--color-bad)] text-sm md:text-lg md:col-span-2 text-center">
-                                        Item name cannot be empty.
+                                        Activity name cannot be empty.
                                     </div>
                                 }
                             </div>
 
-                            {/* Item Cost */}
-                            <div className="grid grid-cols-[auto_1fr] gap-4 w-full mb-4">
-                                <div
-                                    className="flex place-items-center h-full w-full">
-                                    Item Cost:
-                                </div>
-                                <div className="grid grid-cols-[auto_1fr] place-items-end h-full align-center">
-                                    <div
-                                        className="flex place-items-center h-full w-full">
-                                        $
-                                    </div>
-                                    <input 
-                                        type="number" 
-                                        id="new-item-cost" 
-                                        name="item-cost" 
-                                        step="0.01"
-                                        onChange={() => {
-                                            if (splitEvenly) 
-                                                splitCostEvenly();
-                                            else {
-                                                const totalOwing = Object.values(itemPeopleOwing)
-                                                    .map(amount => amount ?? 0)
-                                                    .reduce((sum, amount) => sum + amount, 0);
-
-                                                const itemCost = Number((document.getElementById("new-item-cost") as HTMLInputElement)?.value ?? 0);
-                                                
-                                                if (totalOwing !== itemCost) {
-                                                    setShowPayerAmountErrorMessage(true);
-                                                    setPayerAmountErrorMessage(
-                                                        totalOwing >= itemCost
-                                                        ? "Total owing exceeds item cost."
-                                                        : "Total owing is under item cost."
-                                                    );
-                                                }
-                                            }
-                                        }}
-                                        onKeyDown={(e) => {
-                                            if (e.key === "e" || e.key === "E" || e.key === "+" || e.key === "-") {
-                                            e.preventDefault();
-                                            }
-                                        }}
-                                        className="p-1 md:p-3 bg-[var(--color-background)] rounded-lg w-full"/>
-                                </div>
-                                {
-                                        showItemCostErrorMessage &&
-                                        <div className="text-[var(--color-bad)] text-sm md:text-lg md:col-span-2 text-center">
-                                            Item cost must be a positive number.
-                                        </div>
-                                    }
-                            </div>
-
-                            {/* Split Type */}
+                            {/* Gratituity */}
                             <ToggleSelect
-                                toggleName="Split Type:"
-                                leftLabel="Evenly"
-                                rightLabel="Custom"
-                                onChange={(isEven) => {
-                                    // Reset people owing to even
-                                    if (isEven) 
-                                        splitCostEvenly();
-                                    else {
-                                        const totalOwing = Object.values(itemPeopleOwing)
-                                            .map(amount => amount ?? 0)
-                                            .reduce((sum, amount) => sum + amount, 0);
-
-                                        const itemCost = Number((document.getElementById("new-item-cost") as HTMLInputElement)?.value ?? 0);
-                                        
-                                        if (totalOwing !== itemCost) {
-                                            setShowPayerAmountErrorMessage(true);
-                                            setPayerAmountErrorMessage(
-                                                totalOwing >= itemCost
-                                                ? "Total owing exceeds item cost."
-                                                : "Total owing is under item cost."
-                                            );
-                                        }
-                                    }
-
-                                    setSplitEvenly(isEven);
-                                }}
+                                toggleName="Gratuity Type:"
+                                leftLabel="%"
+                                rightLabel="Flat"
+                                leftDefault={formData.isGratuityTypePercent}
+                                onChange={(isPercent) => setIsGratuityPertcent(isPercent)}
                             />
-
-                            {/* Payer Selection */}
-                            <div className="h-max md:h-full flex place-items-center w-full">
-                                <span>
-                                    Payers:
-                                </span>
-                            </div>
                             <div
-                                className="mb-4 mt-4 w-full">
-                                <SearchDropdown
-                                    placeholder="Search participants..."
-                                    data={availableItemParticipants}
-                                    onSelect={(id, value) => addItemPayer([Number(id), value])}
-                                    displayFn={(value) => `${value[0]} | ${value[1]}`}
-                                />
+                                className="grid grid-cols-2 gap-3 w-full">
+                                <div
+                                    className="flex place-items-center h-full">
+                                    Gratuity Amount:
+                                </div>
+                                <div className="flex w-full justify-center items-center">
+                                    <div className={`grid ${isGratuityPertcent ? "grid-cols-[1fr_auto]" : "grid-cols-[auto_1fr]"} h-full items-center`}>
+                                        <span
+                                            className={`${isGratuityPertcent ? "hidden" : ""}`}>
+                                            $
+                                        </span>
+                                        <input 
+                                            type="number" 
+                                            id="create-activity-gratuity-amount" 
+                                            name="gratuity-amount" 
+                                            step={isGratuityPertcent ? "1" : "0.01"}
+                                            value={gratuityAmount}
+                                            onChange={(e) => {
+                                                const val = e.target.value;
+
+                                                if (val == "") {
+                                                    setGratuityAmount("")
+                                                    return;
+                                                }
+
+                                                setGratuityAmount(Number(e.target.value))
+                                            }}
+                                            onKeyDown={(e) => {
+                                                if (e.key === "e" || e.key === "E" || e.key === "+" || e.key === "-") {
+                                                e.preventDefault();
+                                                }
+                                            }}
+                                            className="p-3 bg-[var(--color-background)] rounded-lg w-[100%]"/>
+                                        <span
+                                            className={`${isGratuityPertcent ? "" : "hidden"}`}>
+                                            %
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
                             {
-                                showPayerAmountErrorMessage &&
+                                showGratuityErrorMessage &&
                                 <div className="text-[var(--color-bad)] text-sm md:text-lg">
-                                    {payerAmountErrorMessage}
+                                    Must add a gratuity amount!
                                 </div>
                             }
 
-                            {/* Selected Payers */}
-                            <ul 
-                                className="grid grid-cols-1 gap-2 w-full rounded-lg max-h-[20dvh] overflow-y-auto content-start mb-4">
-                                {Object.entries(itemPayerParticipants)
-                                    .sort((a, b) => a[1][0].localeCompare(b[1][0]))
-                                    .map(p => (
-                                    <li key={p[0]} className="px-3 py-1 rounded items-center gap-1 grid grid-cols-[1fr_auto] h-max">
-                                        <div 
-                                            key={p[0]}
-                                            className="grid grid-cols-[auto_1fr] rounded-lg w-full gap-2">
-                                            <div
-                                                className="flex place-items-center h-full w-full truncate">
-                                                {p[1][0]} | {p[1][1]}
-                                            </div>
-                                            <div className="grid grid-cols-[auto_1fr] place-items-end h-full align-center w-full">
-                                                <div
-                                                    className="flex place-items-center h-full w-full">
-                                                    $
-                                                </div>
-                                                <input
-                                                    type="number"
-                                                    name={`participant-${p[0]}`}
-                                                    value={itemPeopleOwing[Number(p[0])] ?? ""}
-                                                    readOnly={splitEvenly}
-                                                    onChange={(e) => handleItemPeopleOwingChange(Number(p[0]), e.target.value, Number((document.getElementById("new-item-cost") as HTMLInputElement)?.value ?? 0))}
-                                                    onKeyDown={(e) => {
-                                                        if (e.key === "e" || e.key === "E" || e.key === "+" || e.key === "-") {
-                                                        e.preventDefault();
-                                                        }
-                                                    }}
-                                                    className="p-1 bg-[var(--color-background)] rounded-lg w-full read-only:bg-[var(--color-bg-accent)]"/>
-                                            </div>
-                                        </div>
-                                        <button 
-                                            type="button"
-                                            onClick={() => removeItemPayer([Number(p[0]), p[1]])} className="text-[var(--color-bad)]">
-                                            X
-                                        </button>
-                                    </li>
-                                ))}
-                            </ul>
-                            {
-                                showNoItemPayersErrorMessage &&
-                                <div className="text-[var(--color-bad)] text-sm md:text-lg text-center">
-                                    Item must have payers.
-                                </div>
-                            }
-
-                            <div className="flex justify-end gap-4">
-                                <button type="button" onClick={() => setIsOpen(false)}>Cancel</button>
-                                <button type="submit">Add Item</button>
-                            </div>
-                        </form>
-                    </DialogPanel>
+                            {/* Tax */}
+                            <ToggleSelect
+                                toggleName="Include 5% tax?"
+                                leftLabel="Yes"
+                                rightLabel="No"
+                                leftDefault={formData.addFivePercentTax}
+                                onChange={(yesTax) => setIncludeTax(yesTax)}
+                            />
+                        </div>
                     </div>
-                </Dialog>
-
-                <div className="w-full">
-                    <hr className="border-t border-[var(--color-border)] my-2" />
-                </div>
-
-                <div
-                    className="grid grid-rows-3 justify-center gap-2 w-full">
-                    {/* Gratituity */}
-                    <ToggleSelect
-                        toggleName="Gratuity Type:"
-                        leftLabel="%"
-                        rightLabel="Flat"
-                        leftDefault={formData.isGratuityTypePercent}
-                        onChange={(isPercent) => setIsGratuityPertcent(isPercent)}
-                    />
-                    <div
-                        className="grid grid-cols-[auto_1fr] gap-3 ">
+                    
+                    {/* Add item */}
+                    <div 
+                        className="w-full grid grid-rows-[auto_1fr] gap-2">
                         <div
-                            className="flex place-items-center h-full w-full">
-                            Gratuity Amount:
-                        </div>
-                        <div className={`grid ${isGratuityPertcent ? "grid grid-cols-[1fr_auto]" : "grid grid-cols-[auto_1fr]"} place-items-start h-full align-center w-max`}>
-                            <div
-                                className={`${isGratuityPertcent ? "hidden" : ""} flex place-items-center h-full w-full`}>
-                                $
+                            className="grid w-full grid-cols-[1fr_auto]">
+                            <div className="grid grid-cols-[1fr_auto] h-max">
+                                <div className="flex place-items-center h-max md:h-full w-full">
+                                    Items:
+                                </div>
+                                <button 
+                                    type="button" 
+                                    className="bg-[var(--color-bg-alt-accent)] p-3 rounded-lg"
+                                    onClick={() => {
+                                    // Reset add item dialog state
+                                    setSplitEvenly(true);
+                                    setItemPeopleOwing({});
+                                    setShowPayerAmountErrorMessage(false);
+                                    setAvailableItemParticipants({
+                                        ...participants,
+                                        [currentUser[0]]: [currentUser[1], currentUser[2]] as [string, string]
+                                    });
+                                    setItemPayerParticipants([]);
+                                    
+                                    // Open dialog
+                                    setIsOpen(true)
+                                }}>
+                                    Add Item ✚
+                                </button>
                             </div>
-                            <input 
-                                type="number" 
-                                id="create-activity-gratuity-amount" 
-                                name="gratuity-amount" 
-                                step={isGratuityPertcent ? "1" : "0.01"}
-                                value={gratuityAmount}
-                                onChange={(e) => {
-                                    const val = e.target.value;
-
-                                    if (val == "") {
-                                        setGratuityAmount("")
-                                        return;
-                                    }
-
-                                    setGratuityAmount(Number(e.target.value))
-                                }}
-                                onKeyDown={(e) => {
-                                    if (e.key === "e" || e.key === "E" || e.key === "+" || e.key === "-") {
-                                    e.preventDefault();
-                                    }
-                                }}
-                                className="p-3 bg-[var(--color-background)] rounded-lg w-20"/>
-                            <div
-                                className={`${isGratuityPertcent ? "" : "hidden"} flex place-items-center h-full`}>
-                                %
+                        </div>
+                        <div className="flex h-[50dvh] w-full flex-col rounded-3xl">
+                            <div className="flex-1 overflow-y-scroll scrollbar-custom rounded-3xl w-full bg-[var(--color-bg-accent)] p-1">
+                                <div className="grid gap-3 content-start rounded-2xl bg-[var(--color-background)] p-3 min-h-full h-fit">
+                                    {items.map(
+                                        (item, index) => (
+                                            <Disclosure 
+                                                key={index}
+                                                as="div" 
+                                                className="rounded-3xl bg-[var(--color-bg-accent)] hover:bg-[var(--color-bg-alt-accent)] w-[100%] h-max group" 
+                                                defaultOpen={false}>
+                                                <DisclosureButton className="group flex w-full items-center justify-between p-6 pb-0 md:p-5 md:group-data-[headlessui-state=open]:pb-0">
+                                                    <span className="truncate w-[70dvw] md:w-[25dvw] inline-block text-left">
+                                                        {item.itemName}
+                                                    </span>
+                                                    <ChevronDownIcon className="size-5 fill-white/60 group-data-hover:fill-white/50 group-data-open:rotate-180" />
+                                                </DisclosureButton>
+                                                <DisclosurePanel className="mt-2 p-6 pt-0 md:p-5 md:pt-0">
+                                                    <div>
+                                                        <div className="w-full grid grid-cols-[1fr_auto]">
+                                                            <span className="truncate w-full max-w-[100%] inline-block">Cost: ${item.itemCost}</span>
+                                                            <button 
+                                                                type="button"
+                                                                onClick={() => removeItem(item)} className="text-[var(--color-bad)]">
+                                                                ✖
+                                                            </button>
+                                                        </div>
+                                                        <div className="w-full">
+                                                            Payers:
+                                                        </div>
+                                                        {Object.entries(item.itemOwers).map(
+                                                            (payer, index) => (
+                                                                <div
+                                                                    key={index}
+                                                                    className="grid grid-cols-[auto_1fr] gap-1">
+                                                                    <span className="truncate w-full max-w-[100%] inline-block">{payer[1][0]} | {payer[1][1]}:</span>
+                                                                    <span className="truncate w-full max-w-[100%] inline-block">${payer[1][2]}</span>
+                                                                </div>
+                                                            )
+                                                        )}
+                                                    </div>
+                                                </DisclosurePanel>
+                                            </Disclosure>
+                                        )
+                                    )}
+                                </div>
                             </div>
                         </div>
                     </div>
+
                     {
-                        showGratuityErrorMessage &&
+                        showPayerErrorMessage &&
                         <div className="text-[var(--color-bad)] text-sm md:text-lg">
-                            Must add a gratuity amount!
+                            Must add at least 1 item!
                         </div>
                     }
 
-                    {/* Tax */}
-                    <ToggleSelect
-                        toggleName="Include 5% tax?"
-                        leftLabel="Yes"
-                        rightLabel="No"
-                        leftDefault={formData.addFivePercentTax}
-                        onChange={(yesTax) => setIncludeTax(yesTax)}
-                    />
+                    {/* Add item dialog */}
+                    <Dialog open={isOpen} onClose={() => setIsOpen(false)} className="relative z-50">
+                        <div className="fixed inset-0 flex w-screen items-center justify-center p-4 bg-black/50">
+                        <DialogPanel className="max-w-[80dvh] w-full space-y-4 border bg-[var(--color-bg-accent)] rounded-lg p-5 md:p-12">
+                            <DialogTitle className="font-bold text-center text-3xl md:text-4x1">Add Item</DialogTitle>
+                            <form
+                                onSubmit={handleAddItem}
+                                className="text-1xl md:text-3x1">
+                                {/* Item name */}
+                                <div className="grid grid-cols-[auto_1fr] gap-2 md:gap-4 w-full mb-4">
+                                    <div
+                                        className="flex place-items-center h-full w-full">
+                                        <label htmlFor="new-activity-item">Item Name:</label>
+                                    </div>
+                                    <input 
+                                        type="text" 
+                                        id="new-activity-item"
+                                        name="item"
+                                        className="bg-[var(--color-background)] rounded-lg p-1 md:p-3 w-full"/>
+                                    {
+                                        showItemNameErrorMessage &&
+                                        <div className="text-[var(--color-bad)] text-sm md:text-lg md:col-span-2 text-center">
+                                            Item name cannot be empty.
+                                        </div>
+                                    }
+                                </div>
+
+                                {/* Item Cost */}
+                                <div className="grid grid-cols-[auto_1fr] gap-4 w-full mb-4">
+                                    <div
+                                        className="flex place-items-center h-full w-full">
+                                        Item Cost:
+                                    </div>
+                                    <div className="grid grid-cols-[auto_1fr] place-items-end h-full align-center">
+                                        <div
+                                            className="flex place-items-center h-full w-full">
+                                            $
+                                        </div>
+                                        <input 
+                                            type="number" 
+                                            id="new-item-cost" 
+                                            name="item-cost" 
+                                            step="0.01"
+                                            onChange={() => {
+                                                if (splitEvenly) 
+                                                    splitCostEvenly();
+                                                else {
+                                                    const totalOwing = Object.values(itemPeopleOwing)
+                                                        .map(amount => amount ?? 0)
+                                                        .reduce((sum, amount) => sum + amount, 0);
+
+                                                    const itemCost = Number((document.getElementById("new-item-cost") as HTMLInputElement)?.value ?? 0);
+                                                    
+                                                    if (totalOwing !== itemCost) {
+                                                        setShowPayerAmountErrorMessage(true);
+                                                        setPayerAmountErrorMessage(
+                                                            totalOwing >= itemCost
+                                                            ? "Total owing exceeds item cost."
+                                                            : "Total owing is under item cost."
+                                                        );
+                                                    }
+                                                }
+                                            }}
+                                            onKeyDown={(e) => {
+                                                if (e.key === "e" || e.key === "E" || e.key === "+" || e.key === "-") {
+                                                e.preventDefault();
+                                                }
+                                            }}
+                                            className="p-1 md:p-3 bg-[var(--color-background)] rounded-lg w-full"/>
+                                    </div>
+                                    {
+                                            showItemCostErrorMessage &&
+                                            <div className="text-[var(--color-bad)] text-sm md:text-lg md:col-span-2 text-center">
+                                                Item cost must be a positive number.
+                                            </div>
+                                        }
+                                </div>
+
+                                {/* Split Type */}
+                                <ToggleSelect
+                                    toggleName="Split Type:"
+                                    leftLabel="Evenly"
+                                    rightLabel="Custom"
+                                    onChange={(isEven) => {
+                                        // Reset people owing to even
+                                        if (isEven) 
+                                            splitCostEvenly();
+                                        else {
+                                            const totalOwing = Object.values(itemPeopleOwing)
+                                                .map(amount => amount ?? 0)
+                                                .reduce((sum, amount) => sum + amount, 0);
+
+                                            const itemCost = Number((document.getElementById("new-item-cost") as HTMLInputElement)?.value ?? 0);
+                                            
+                                            if (totalOwing !== itemCost) {
+                                                setShowPayerAmountErrorMessage(true);
+                                                setPayerAmountErrorMessage(
+                                                    totalOwing >= itemCost
+                                                    ? "Total owing exceeds item cost."
+                                                    : "Total owing is under item cost."
+                                                );
+                                            }
+                                        }
+
+                                        setSplitEvenly(isEven);
+                                    }}
+                                />
+
+                                {/* Payer Selection */}
+                                <div className="h-max md:h-full flex place-items-center w-full">
+                                    <span>
+                                        Payers:
+                                    </span>
+                                </div>
+                                <div
+                                    className="mb-4 mt-4 w-full">
+                                    <SearchDropdown
+                                        placeholder="Search participants..."
+                                        data={availableItemParticipants}
+                                        onSelect={(id, value) => addItemPayer([Number(id), value])}
+                                        displayFn={(value) => `${value[0]} | ${value[1]}`}
+                                    />
+                                </div>
+                                {
+                                    showPayerAmountErrorMessage &&
+                                    <div className="text-[var(--color-bad)] text-sm md:text-lg">
+                                        {payerAmountErrorMessage}
+                                    </div>
+                                }
+
+                                {/* Selected Payers */}
+                                <ul 
+                                    className="grid grid-cols-1 gap-2 w-full rounded-lg max-h-[20dvh] overflow-y-auto content-start mb-4">
+                                    {Object.entries(itemPayerParticipants)
+                                        .sort((a, b) => a[1][0].localeCompare(b[1][0]))
+                                        .map(p => (
+                                        <li key={p[0]} className="px-3 py-1 rounded items-center gap-1 grid grid-cols-[1fr_auto] h-max">
+                                            <div 
+                                                key={p[0]}
+                                                className="grid grid-cols-[auto_1fr] rounded-lg w-full gap-2">
+                                                <div
+                                                    className="flex place-items-center h-full w-full truncate">
+                                                    {p[1][0]} | {p[1][1]}
+                                                </div>
+                                                <div className="grid grid-cols-[auto_1fr] place-items-end h-full align-center w-full">
+                                                    <div
+                                                        className="flex place-items-center h-full w-full">
+                                                        $
+                                                    </div>
+                                                    <input
+                                                        type="number"
+                                                        name={`participant-${p[0]}`}
+                                                        value={itemPeopleOwing[Number(p[0])] ?? ""}
+                                                        readOnly={splitEvenly}
+                                                        onChange={(e) => handleItemPeopleOwingChange(Number(p[0]), e.target.value, Number((document.getElementById("new-item-cost") as HTMLInputElement)?.value ?? 0))}
+                                                        onKeyDown={(e) => {
+                                                            if (e.key === "e" || e.key === "E" || e.key === "+" || e.key === "-") {
+                                                            e.preventDefault();
+                                                            }
+                                                        }}
+                                                        className="p-1 bg-[var(--color-background)] rounded-lg w-full read-only:bg-[var(--color-bg-accent)]"/>
+                                                </div>
+                                            </div>
+                                            <button 
+                                                type="button"
+                                                onClick={() => removeItemPayer([Number(p[0]), p[1]])} className="text-[var(--color-bad)]">
+                                                X
+                                            </button>
+                                        </li>
+                                    ))}
+                                </ul>
+                                {
+                                    showNoItemPayersErrorMessage &&
+                                    <div className="text-[var(--color-bad)] text-sm md:text-lg text-center">
+                                        Item must have payers.
+                                    </div>
+                                }
+
+                                <div className="flex justify-end gap-4">
+                                    <button type="button" onClick={() => setIsOpen(false)}>Cancel</button>
+                                    <button type="submit">Add Item</button>
+                                </div>
+                            </form>
+                        </DialogPanel>
+                        </div>
+                    </Dialog>
                 </div>
                 
                 <div
