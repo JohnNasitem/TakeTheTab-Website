@@ -87,101 +87,110 @@ export default function FetchActivityPage() {
             </div>
 
             {/* Items */}
-            <div className="bg-[var(--color-bg-accent)] rounded-3xl p-5 grid gap-3 content-start">
-                {activity?.items?.map((item) => (
-                    <Disclosure 
-                        key={item.itemId}
-                        as="div" 
-                        className="rounded-3xl bg-[var(--color-bg-alt-accent)] hover:bg-[var(--color-background)] text-2xl md:text-3xl w-full h-max group" 
-                        defaultOpen={false}>
-                        <DisclosureButton className="group flex w-full items-center justify-between p-6 pb-0 md:p-5 md:group-data-[headlessui-state=open]:pb-0">
-                            <span className="">
-                                {item.itemName}
-                            </span>
-                            <ChevronDownIcon className="size-5 fill-white/60 group-data-hover:fill-white/50 group-data-open:rotate-180" />
-                        </DisclosureButton>
-                        <DisclosurePanel className="mt-2 p-6 pt-0 md:p-5 md:pt-0">
-                            <div>
-                                <div className="truncate w-full max-w-[100%] inline-block">
-                                    Subtotal: ${item.itemCost}
-                                </div>
-                                <div className="truncate w-full max-w-[100%] inline-block">
-                                    Tax: ${activity.addFivePercentTax ? (item.itemCost * 0.05).toFixed(2) : 0}
-                                </div>
-                                <div className="truncate w-full max-w-[100%] inline-block">
-                                    GrandTotal: ${activity.addFivePercentTax ? (item.itemCost * 1.05).toFixed(2) : item.itemCost.toFixed(2)}
-                                </div>
-                                <div className="truncate w-full max-w-[100%] inline-block">
-                                    Split Type: {item.isSplitEvently ? "Evenly" : "Custom" }
-                                </div>
-                                {item.payers.map((payer) => (
-                                    <div
-                                        key={`item-payer-${payer.payerId}`}>
-                                        <span className="text-ellipsis truncate">{payer.payerName} | {payer.payerEmail}</span> : ${(activity.addFivePercentTax ? payer.amountOwing * 1.05 : payer.amountOwing).toFixed(2)}
+            <div className="h-[71dvh] grid grid-rows-[auto_1fr] gap-3 p-5 bg-[var(--color-bg-accent)] rounded-3xl">
+                <span className="text-center text-3xl md:text-4xl">Items</span>
+                <div className="overflow-y-auto scrollbar-custom rounded-3xl">
+                    <div className="bg-[var(--color-background)] rounded-3xl p-5 grid gap-3 content-start min-h-full h-fit ml-1 mr-1">
+                        {activity?.items?.map((item) => (
+                            <Disclosure 
+                                key={item.itemId}
+                                as="div" 
+                                className="rounded-3xl bg-[var(--color-bg-accent)] hover:bg-[var(--color-bg-alt-accent)] text-2xl md:text-3xl w-full h-max group" 
+                                defaultOpen={false}>
+                                <DisclosureButton className="group flex w-full items-center justify-between p-6 pb-0 md:p-5 md:group-data-[headlessui-state=open]:pb-0">
+                                    <span className="">
+                                        {item.itemName}
+                                    </span>
+                                    <ChevronDownIcon className="size-5 fill-white/60 group-data-hover:fill-white/50 group-data-open:rotate-180" />
+                                </DisclosureButton>
+                                <DisclosurePanel className="mt-2 p-6 pt-0 md:p-5 md:pt-0">
+                                    <div>
+                                        <div className="truncate w-full max-w-[100%] inline-block">
+                                            Subtotal: ${item.itemCost}
+                                        </div>
+                                        <div className="truncate w-full max-w-[100%] inline-block">
+                                            Tax: ${activity.addFivePercentTax ? (item.itemCost * 0.05).toFixed(2) : 0}
+                                        </div>
+                                        <div className="truncate w-full max-w-[100%] inline-block">
+                                            GrandTotal: ${activity.addFivePercentTax ? (item.itemCost * 1.05).toFixed(2) : item.itemCost.toFixed(2)}
+                                        </div>
+                                        <div className="truncate w-full max-w-[100%] inline-block">
+                                            Split Type: {item.isSplitEvently ? "Evenly" : "Custom" }
+                                        </div>
+                                        {item.payers.map((payer) => (
+                                            <div
+                                                key={`item-payer-${payer.payerId}`}>
+                                                <span className="text-ellipsis truncate">{payer.payerName} | {payer.payerEmail}</span> : ${(activity.addFivePercentTax ? payer.amountOwing * 1.05 : payer.amountOwing).toFixed(2)}
+                                            </div>
+                                        ))
+                                        }
                                     </div>
-                                ))
-                                }
-                            </div>
-                        </DisclosurePanel>
-                    </Disclosure>
-                ))
-                }
-                <Disclosure 
-                    as="div" 
-                    className="rounded-3xl bg-[var(--color-action)] hover:bg-[var(--color-action-accent)] text-2xl md:text-3xl w-full h-max group" 
-                    defaultOpen={false}>
-                    <DisclosureButton className="group flex w-full items-center justify-between p-6 pb-0 md:p-5 md:group-data-[headlessui-state=open]:pb-0">
-                        <span className="">
-                            Grand Total: ${getActivityGrandTotal().toFixed(2)}
-                        </span>
-                        <ChevronDownIcon className="size-5 fill-white/60 group-data-hover:fill-white/50 group-data-open:rotate-180" />
-                    </DisclosureButton>
-                    <DisclosurePanel className="mt-2 p-6 pt-0 md:p-5 md:pt-0">
-                        <div>
-                            <div className="text-ellipsis truncate w-full md:max-w-[50dvw] max-w-[70dvw]">
-                                Activity Subtotal: ${(activity?.activitySubtotal ?? 0).toFixed(2)}
-                            </div>
-                            <div className="text-ellipsis truncate w-full md:max-w-[50dvw] max-w-[70dvw]">
-                                Tax ({activity?.addFivePercentTax ? "5" : "0"}%) : ${(activity?.addFivePercentTax ? activity.activitySubtotal! * 0.05 : 0).toFixed(2)}
-                            </div>
-                            <div className="text-ellipsis truncate w-full md:max-w-[50dvw] max-w-[70dvw]">
-                                Gratuity {activity?.isGratuityTypePercent ? `(${activity.gratuityAmount!.toFixed(0)}%) ` : ""}: ${(activity?.isGratuityTypePercent ? activity.activitySubtotal! * activity.gratuityAmount! / 100.0 : activity?.gratuityAmount ?? 0).toFixed(2)}
-                            </div>
-                            <div className="text-ellipsis truncate w-full md:max-w-[50dvw] max-w-[70dvw]">
-                                GrandTotal: ${getActivityGrandTotal().toFixed(2)}
-                            </div>
-                        </div>
-                    </DisclosurePanel>
-                </Disclosure>
+                                </DisclosurePanel>
+                            </Disclosure>
+                        ))
+                        }
+                        <Disclosure 
+                            as="div" 
+                            className="rounded-3xl bg-[var(--color-action)] hover:bg-[var(--color-action-accent)] text-2xl md:text-3xl w-full h-max group" 
+                            defaultOpen={false}>
+                            <DisclosureButton className="group flex w-full items-center justify-between p-6 pb-0 md:p-5 md:group-data-[headlessui-state=open]:pb-0">
+                                <span className="">
+                                    Grand Total: ${getActivityGrandTotal().toFixed(2)}
+                                </span>
+                                <ChevronDownIcon className="size-5 fill-white/60 group-data-hover:fill-white/50 group-data-open:rotate-180" />
+                            </DisclosureButton>
+                            <DisclosurePanel className="mt-2 p-6 pt-0 md:p-5 md:pt-0">
+                                <div>
+                                    <div className="text-ellipsis truncate w-full md:max-w-[50dvw] max-w-[70dvw]">
+                                        Activity Subtotal: ${(activity?.activitySubtotal ?? 0).toFixed(2)}
+                                    </div>
+                                    <div className="text-ellipsis truncate w-full md:max-w-[50dvw] max-w-[70dvw]">
+                                        Tax ({activity?.addFivePercentTax ? "5" : "0"}%) : ${(activity?.addFivePercentTax ? activity.activitySubtotal! * 0.05 : 0).toFixed(2)}
+                                    </div>
+                                    <div className="text-ellipsis truncate w-full md:max-w-[50dvw] max-w-[70dvw]">
+                                        Gratuity {activity?.isGratuityTypePercent ? `(${activity.gratuityAmount!.toFixed(0)}%) ` : ""}: ${(activity?.isGratuityTypePercent ? activity.activitySubtotal! * activity.gratuityAmount! / 100.0 : activity?.gratuityAmount ?? 0).toFixed(2)}
+                                    </div>
+                                    <div className="text-ellipsis truncate w-full md:max-w-[50dvw] max-w-[70dvw]">
+                                        GrandTotal: ${getActivityGrandTotal().toFixed(2)}
+                                    </div>
+                                </div>
+                            </DisclosurePanel>
+                        </Disclosure>
+                    </div>
+                </div>
             </div>
 
             {/* Payers */}
-            <div className={`rounded-3xl bg-[var(--color-bg-accent)] p-5 grid gap-3 content-start h-full w-full`}>
+            <div className="h-[71dvh] grid grid-rows-[auto_1fr] gap-3 p-5 bg-[var(--color-bg-accent)] rounded-3xl">
                 <span className="text-center text-3xl md:text-4xl">Payers</span>
-                {activity?.payers?.map((payer) => (
-                    <Disclosure 
-                        key={payer.payerId}
-                        as="div" 
-                        className="rounded-3xl bg-[var(--color-bg-alt-accent)] hover:bg-[var(--color-background)] text-2xl md:text-3xl w-full h-max group" 
-                        defaultOpen={false}>
-                        <DisclosureButton className="group flex w-full items-center justify-between p-6 pb-0 md:p-5 md:group-data-[headlessui-state=open]:pb-0">
-                            <span className="">
-                                {payer.payerName}
-                            </span>
-                            <ChevronDownIcon className="size-5 fill-white/60 group-data-hover:fill-white/50 group-data-open:rotate-180" />
-                        </DisclosureButton>
-                        <DisclosurePanel className="mt-2 p-6 pt-0 md:p-5 md:pt-0">
-                            <div>
-                                <div className="truncate w-full max-w-[100%] inline-block">
-                                    Email: {payer.payerEmail}
-                                </div>
-                                <div className="truncate w-full max-w-[100%] inline-block">
-                                    Debt: <span className="text-[var(--color-bad)]">${payer.amountOwing.toFixed(2)}</span>
-                                </div>
-                            </div>
-                        </DisclosurePanel>
-                    </Disclosure>
-                ))}
+                <div className="overflow-y-auto scrollbar-custom rounded-3xl">
+                    <div className="rounded-3xl grid gap-3 content-start min-h-full h-fit ml-1 mr-1">
+                        {activity?.payers?.map((payer) => (
+                            <Disclosure 
+                                key={payer.payerId}
+                                as="div" 
+                                className="rounded-3xl bg-[var(--color-bg-alt-accent)] hover:bg-[var(--color-background)] text-2xl md:text-3xl w-full h-max group" 
+                                defaultOpen={false}>
+                                <DisclosureButton className="group flex w-full items-center justify-between p-6 pb-0 md:p-5 md:group-data-[headlessui-state=open]:pb-0">
+                                    <span className="">
+                                        {payer.payerName}
+                                    </span>
+                                    <ChevronDownIcon className="size-5 fill-white/60 group-data-hover:fill-white/50 group-data-open:rotate-180" />
+                                </DisclosureButton>
+                                <DisclosurePanel className="mt-2 p-6 pt-0 md:p-5 md:pt-0">
+                                    <div>
+                                        <div className="truncate w-full max-w-[100%] inline-block">
+                                            Email: {payer.payerEmail}
+                                        </div>
+                                        <div className="truncate w-full max-w-[100%] inline-block">
+                                            Debt: <span className="text-[var(--color-bad)]">${payer.amountOwing.toFixed(2)}</span>
+                                        </div>
+                                    </div>
+                                </DisclosurePanel>
+                            </Disclosure>
+                        ))}
+                    </div>
+                </div>
             </div>
         </div>
     );
