@@ -449,7 +449,7 @@ export default function ActivityForm(formData: ActivityFormProps) {
                             </div>
                         </div>
                         <div className="flex h-[50dvh] w-full flex-col rounded-3xl">
-                            <div className="flex-1 overflow-y-scroll scrollbar-custom rounded-3xl w-full bg-[var(--color-bg-accent)] p-1">
+                            <div className="flex-1 overflow-y-auto scrollbar-custom rounded-3xl w-full bg-[var(--color-bg-accent)] p-1">
                                 <div className="grid gap-3 content-start rounded-3xl bg-[var(--color-background)] p-3 min-h-full h-fit">
                                     {items.map(
                                         (item, index) => (
