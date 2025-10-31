@@ -47,6 +47,7 @@ export default function ActivityForm(formData: ActivityFormProps) {
 
     const [participants, setParticipants] = useState<Record<number, [string, string]>>([]);
     const [showGratuityErrorMessage, setShowGratuityErrorMessage] = useState(false);
+    const [gratuityErrorMessage, setGratuityErrorMessage] = useState("");
     const [isGratuityPertcent, setIsGratuityPertcent] = useState(formData.isGratuityTypePercent as boolean ?? true);
     const [includeTax, setIncludeTax] = useState(formData.addFivePercentTax as boolean ?? true);
     const [currentUser, setCurrentUser] = useState<[number, string, string]>([-1, "", ""]);
@@ -207,6 +208,22 @@ export default function ActivityForm(formData: ActivityFormProps) {
         else
             setShowPayerErrorMessage(false);
         if (!gratuityAmountStr || gratuityAmountStr.trim() === "") {
+            setGratuityErrorMessage("Must add a gratuity amount!");
+            setShowGratuityErrorMessage(true);
+            errorsExist = true;
+        }
+        else 
+            setShowGratuityErrorMessage(false);
+
+        const gratuityAmount = Number(gratuityAmountStr);
+
+        if (isGratuityPertcent && gratuityAmount > 1000) {
+            setGratuityErrorMessage("Percent gratuity amounts must be a number between 1-1000");
+            setShowGratuityErrorMessage(true);
+            errorsExist = true;
+        }
+        else if (!isGratuityPertcent && gratuityAmount > 999999999) {
+            setGratuityErrorMessage("Flat gratuity amounts must be a number between 1-999,999,999");
             setShowGratuityErrorMessage(true);
             errorsExist = true;
         }
@@ -283,7 +300,7 @@ export default function ActivityForm(formData: ActivityFormProps) {
         }
         else 
             setShowItemNameErrorMessage(false);
-        if (itemCost <= 0) {
+        if (itemCost <= 0 || itemCost > 999999999) {
             setShowItemCostErrorMessage(true);
             errorsExist = true;
         }
@@ -402,8 +419,8 @@ export default function ActivityForm(formData: ActivityFormProps) {
                             </div>
                             {
                                 showGratuityErrorMessage &&
-                                <div className="text-[var(--color-bad)] text-sm md:text-lg">
-                                    Must add a gratuity amount!
+                                <div className="text-[var(--color-bad)] text-sm md:text-lg text-center">
+                                    {gratuityErrorMessage}
                                 </div>
                             }
 
@@ -577,7 +594,7 @@ export default function ActivityForm(formData: ActivityFormProps) {
                                     {
                                             showItemCostErrorMessage &&
                                             <div className="text-[var(--color-bad)] text-sm md:text-lg md:col-span-2 text-center">
-                                                Item cost must be a positive number.
+                                                Item cost must be a number between 1-999,999,999
                                             </div>
                                         }
                                 </div>
