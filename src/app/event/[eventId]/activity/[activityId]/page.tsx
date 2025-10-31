@@ -59,8 +59,8 @@ export default function FetchActivityPage() {
 
             {/* Activity name*/}
             <div className="text-3xl md:text-7xl md:col-span-1 grid grid-cols-[1fr_auto] w-full gap-4 bg-[var(--color-bg-accent)] rounded-3xl p-5">
-                <h1 className="md:flex md:items-end h-max font-bold text-ellipsis truncate max-w-[100%] items-center">
-                    {activity?.activityName ?? ""} 
+                <h1 className="md:flex md:items-end h-full font-bold items-center w-full md:max-w-[60dvw] max-w-[74dvw]">
+                    <span className="truncate w-full max-w-[100%] inline-block">{activity?.activityName ?? ""} </span>
                 </h1>
                 {
                     activity?.isPayee &&
