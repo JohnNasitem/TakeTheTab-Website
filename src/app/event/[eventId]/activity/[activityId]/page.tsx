@@ -55,7 +55,7 @@ export default function FetchActivityPage() {
 
     return (
         // Entire Page
-        <div className="pageSection p-3 grid md:grid-rows-[auto_1fr] grid-cols-1 md:grid-cols-[66fr_34fr] gap-4">
+        <div className="pageSection p-3 grid md:grid-rows-[auto_1fr] grid-cols-1 md:grid-cols-[64.4fr_34fr] gap-4">
 
             {/* Activity name*/}
             <div className="text-3xl md:text-7xl md:col-span-1 grid grid-cols-[1fr_auto] w-full gap-4 bg-[var(--color-bg-accent)] rounded-3xl p-5">
