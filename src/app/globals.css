@@ -1,12 +1,6 @@
 @import "tailwindcss";
 @import "react-day-picker/style.css";
 
-/* Not a recognized rule but does work */
-@plugin 'tailwind-scrollbar' {
-    nocompatible: true;
-    preferredStrategy: 'pseudoelements';
-}
-
 :root {
   --background: #141416;
   --foreground: #DCD7BA;
