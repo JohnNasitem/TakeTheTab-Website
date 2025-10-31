@@ -145,7 +145,7 @@ export default function EventForm(eventFormData: EventForm) {
         <div className="pageSection flex text-1xl md:text-2xl">
             <form
                 onSubmit={handleCreateEvent}
-                className=" self-center grid grid-cols-1 md:grid-cols-[auto_1fr] bg-[var(--color-bg-accent)] place-items-center rounded-lg p-10 mx-auto w-[90dvw] md:w-[50dvw] h-max gap-3 md:gap-6">
+                className=" self-center grid grid-cols-1 md:grid-cols-[auto_1fr] bg-[var(--color-bg-accent)] place-items-center rounded-3xl p-10 mx-auto w-[90dvw] md:w-[50dvw] h-max gap-3 md:gap-6">
                 {/* Title */}
                 <h1 className="text-3xl md:text-4xl md:col-span-2">{eventFormData.title}</h1>
 
