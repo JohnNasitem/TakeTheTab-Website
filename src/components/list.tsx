@@ -19,7 +19,7 @@ const List = (props: ListProps) => {
                 <span className="text-center text-3xl md:text-4xl">{props.title}</span>
                 <div className='flex min-h-0 h-full w-full flex-col'>
                     <div className="flex-1 overflow-y-auto scrollbar-custom rounded-3xl">
-                        <div className='grid gap-3 rounded-3xl bg-[var(--color-background)] p-3 ml-1 mr-1'>
+                        <div className={`grid gap-3 rounded-3xl ${props.items.length > 0 ? "bg-[var(--color-background)] p-3" : ""} ml-1 mr-1`}>
                             {props.items.map((item) => (
                                 <ListItem key={item.id} {...item} />
                             ))}
