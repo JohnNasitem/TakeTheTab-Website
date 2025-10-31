@@ -102,7 +102,7 @@ export default function FetchEventPage() {
             {/* Event name and date */}
             <div className="col-span-2 md:col-span-1 grid grid-col-1 md:grid-cols-[auto_1fr] w-full gap-4 grid-rows-[1fr_auto] md:grid-rows-1 bg-[var(--color-bg-accent)] rounded-3xl p-5">
                 <div className="text-3xl md:text-7xl md:max-w-max grid w-full md:grid-cols-1 grid-cols-[1fr_auto] md:grid-rows-1 gap-2">
-                    <h1 className="md:flex md:items-end h-full font-bold text-ellipsis truncate max-w-[80dvw] md:max-w-[60dvw]">
+                    <h1 className="md:flex md:items-end h-full font-bold w-full truncate w-full max-w-[100%] inline-block">
                         {event?.eventName ?? ""} 
                     </h1>
                     {
@@ -148,7 +148,7 @@ export default function FetchEventPage() {
                 <span className="block md:inline text-2xl md:text-3xl">
                     Owed
                 </span>
-                <div className="text-4xl md:text-6xl w-full">
+                <div className="text-4xl md:text-6xl w-full truncate w-full max-w-[100%] inline-block">
                     ${event?.userTotalOwed ?? 0}
                 </div>
             </div>
@@ -158,7 +158,7 @@ export default function FetchEventPage() {
                 <span className="block md:inline text-2xl md:text-3xl">
                     Debt
                 </span>
-                <div className="text-4xl md:text-6xl">
+                <div className="text-4xl md:text-6xl w-full truncate w-full max-w-[100%] inline-block">
                     ${event?.userTotalOwing ?? 0}
                 </div>
             </div>

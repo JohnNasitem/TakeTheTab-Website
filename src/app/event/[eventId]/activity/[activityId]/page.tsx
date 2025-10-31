@@ -59,7 +59,7 @@ export default function FetchActivityPage() {
 
             {/* Activity name*/}
             <div className="text-3xl md:text-7xl md:col-span-1 grid grid-cols-[1fr_auto] w-full gap-4 bg-[var(--color-bg-accent)] rounded-3xl p-5">
-                <h1 className="md:flex md:items-end h-max font-bold text-ellipsis truncate max-w-[80dvw] md:max-w-[60dvw] items-center">
+                <h1 className="md:flex md:items-end h-max font-bold text-ellipsis truncate max-w-[100%] items-center">
                     {activity?.activityName ?? ""} 
                 </h1>
                 {
@@ -81,7 +81,7 @@ export default function FetchActivityPage() {
                 <span className="block md:inline text-2xl md:text-3xl">
                     {activity?.isPayee ? "Owed" : "Debt"}
                 </span>
-                <div className="text-4xl md:text-6xl w-full">
+                <div className="text-4xl md:text-6xl w-full truncate w-full max-w-[100%] inline-block">
                     ${activity?.amount ?? 0}
                 </div>
             </div>
@@ -102,16 +102,16 @@ export default function FetchActivityPage() {
                         </DisclosureButton>
                         <DisclosurePanel className="mt-2 p-6 pt-0 md:p-5 md:pt-0">
                             <div>
-                                <div className="text-ellipsis truncate w-full md:max-w-[20dvw] max-w-[70dvw]">
+                                <div className="truncate w-full max-w-[100%] inline-block">
                                     Subtotal: ${item.itemCost}
                                 </div>
-                                <div className="text-ellipsis truncate w-full md:max-w-[20dvw] max-w-[70dvw]">
+                                <div className="truncate w-full max-w-[100%] inline-block">
                                     Tax: ${activity.addFivePercentTax ? (item.itemCost * 0.05).toFixed(2) : 0}
                                 </div>
-                                <div className="text-ellipsis truncate w-full md:max-w-[20dvw] max-w-[70dvw]">
+                                <div className="truncate w-full max-w-[100%] inline-block">
                                     GrandTotal: ${activity.addFivePercentTax ? (item.itemCost * 1.05).toFixed(2) : item.itemCost.toFixed(2)}
                                 </div>
-                                <div className="text-ellipsis truncate w-full md:max-w-[20dvw] max-w-[70dvw]">
+                                <div className="truncate w-full max-w-[100%] inline-block">
                                     Split Type: {item.isSplitEvently ? "Evenly" : "Custom" }
                                 </div>
                                 {item.payers.map((payer) => (
@@ -172,10 +172,10 @@ export default function FetchActivityPage() {
                         </DisclosureButton>
                         <DisclosurePanel className="mt-2 p-6 pt-0 md:p-5 md:pt-0">
                             <div>
-                                <div className="text-ellipsis truncate w-full md:max-w-[20dvw] max-w-[70dvw]">
+                                <div className="truncate w-full max-w-[100%] inline-block">
                                     Email: {payer.payerEmail}
                                 </div>
-                                <div className="text-ellipsis truncate w-full md:max-w-[20dvw] max-w-[70dvw]">
+                                <div className="truncate w-full max-w-[100%] inline-block">
                                     Debt: <span className="text-[var(--color-bad)]">${payer.amountOwing.toFixed(2)}</span>
                                 </div>
                             </div>

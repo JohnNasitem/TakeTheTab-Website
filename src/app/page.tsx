@@ -49,7 +49,7 @@ export default function Home() {
       {/* Display name */}
       <div className="text-3xl md:text-7xl col-span-2 md:col-span-1 w-full gap-4 grid-rows-[1fr_auto] md:grid-rows-1 bg-[var(--color-bg-accent)] rounded-3xl p-5">
         <h1 className="flex justify-center justify-start md:items-center h-full font-bold">
-          <span className="truncate w-full md:max-w-[60dvw] max-w-[80dvw] inline-block">{displayName ?? ""} </span>
+          <span className="truncate w-full max-w-[100%] inline-block">{displayName ?? ""} </span>
         </h1>
       </div>
 
@@ -58,14 +58,14 @@ export default function Home() {
           <span className="block md:inline text-2xl md:text-3xl">
               Owed
           </span>
-          <div className="text-4xl md:text-6xl w-full">
+          <div className="text-4xl md:text-6xl w-full truncate w-full max-w-[100%] inline-block">
               ${amountOwed ?? 0}
           </div>
       </div>
 
       {/* Debt amount */}
       <div className="grid grid-rows-[min-content_1fr] text-center bg-[var(--color-bad)] rounded-3xl p-5">
-          <span className="block md:inline text-2xl md:text-3xl">
+          <span className="block md:inline text-2xl md:text-3xl truncate w-full max-w-[100%] inline-block">
               Debt
           </span>
           <div className="text-4xl md:text-6xl">
