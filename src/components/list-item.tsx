@@ -15,7 +15,7 @@ const ListItem = (itemProps: ItemProps) => {
     return (
         <Link 
             href={itemProps.clickLink}  
-            className="grid grid-cols-[70fr_30fr] font-[family-name:var(--font-geist-mono)] rounded-3xl bg-[var(--color-bg-alt-accent)] hover:bg-[var(--color-background)] p-4 md:p-5 text-2xl md:text-3xl w-full h-max">
+            className="grid grid-cols-[70fr_30fr] font-[family-name:var(--font-geist-mono)] rounded-3xl bg-[var(--color-bg-alt-accent)] hover:bg-[var(--color-bg-accent)] p-4 md:p-5 text-2xl md:text-3xl w-full h-max">
             <div
                 className='truncate pr-4 h-full flex items-center'>
                 {itemProps.name}

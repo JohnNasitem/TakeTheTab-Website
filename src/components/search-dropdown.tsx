@@ -63,7 +63,7 @@ export default function SearchDropdown<T>({
                 setIsFocused(false);
               }}
             >
-              <div className="truncate w-[65dvw] md:w-[45dvw] inline-block">
+              <div className="truncate w-[100%] inline-block">
                 {displayFn ? displayFn(item) : String(item)}
               </div>
             </li>

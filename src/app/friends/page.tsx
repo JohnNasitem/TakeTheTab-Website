@@ -120,7 +120,7 @@ export default function FriendPage() {
 
 
     return (
-        <div className="pageSection p-3 grid grid-rows-[auto_1fr] gap-4">
+        <div className="pageSection p-3 grid grid-rows-[auto_1fr] gap-4 min-h-0 h-full">
             {/* Add Friends Form */}
             <form 
                 onSubmit={AddFriend}
@@ -154,30 +154,34 @@ export default function FriendPage() {
             </form>
 
             {/* Lists */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 min-h-0 h-full">
                 {/* Friend requests list */}
                 <div
                     id="incoming-friend-requests-list" 
                     className={`rounded-3xl bg-[var(--color-bg-accent)] p-5 grid gap-3 content-start w-full`}>
                     <div className="text-center text-3xl md:text-4xl font-bold m-3"> Friend Requests </div>
-                    <div className="grid gap-3">
-                        {friendRequestItemProps.map(friendProp => (
-                            <FriendRequestItem
-                                key={friendProp.userId}
-                                userId={friendProp.userId}
-                                displayName={friendProp.displayName}
-                                email={friendProp.email}
-                                onAccept={friendProp.onAccept}
-                                onRemove={friendProp.onRemove}
-                            />
-                        ))}
+                    <div className="flex flex-col h-[90%]">
+                        <div className="overflow-y-auto scrollbar-custom p-3 min-h-0 flex-1">
+                            <div className="grid gap-3 content-start">
+                                {friendRequestItemProps.map(friendProp => (
+                                    <FriendRequestItem
+                                        key={friendProp.userId}
+                                        userId={friendProp.userId}
+                                        displayName={friendProp.displayName}
+                                        email={friendProp.email}
+                                        onAccept={friendProp.onAccept}
+                                        onRemove={friendProp.onRemove}
+                                    />
+                                ))}
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 {/* Friends list */}
                 <div 
                     id="friend-list" 
-                    className={`rounded-3xl bg-[var(--color-bg-accent)] p-5 grid gap-3 content-start w-full`}>
+                    className={`rounded-3xl bg-[var(--color-bg-accent)] p-5 w-full min-h-0 h-full`}>
                     <div className="text-center text-3xl md:text-4xl font-bold m-3"> Friends </div>
                     {
                         errorOccured ?
@@ -187,17 +191,21 @@ export default function FriendPage() {
                         :
                         (
                             hasFriends ? 
-                            <div className="grid gap-3">
-                                {friendItemProps.map(friendProp => (
-                                    <FriendItem
-                                        key={friendProp.userId}
-                                        userId={friendProp.userId}
-                                        displayName={friendProp.displayName}
-                                        email={friendProp.email}
-                                        onAccept={friendProp.onAccept}
-                                        onRemove={friendProp.onRemove}
-                                    />
-                                ))}
+                            <div className="flex flex-col h-[90%]">
+                                <div className="overflow-y-auto scrollbar-custom min-h-0 flex-1 rounded-3xl">
+                                    <div className="grid gap-3 content-start p-3 rounded-3xl bg-[var(--color-background)] mr-1 ml-1">
+                                        {friendItemProps.map(friendProp => (
+                                            <FriendItem
+                                                key={friendProp.userId}
+                                                userId={friendProp.userId}
+                                                displayName={friendProp.displayName}
+                                                email={friendProp.email}
+                                                onAccept={friendProp.onAccept}
+                                                onRemove={friendProp.onRemove}
+                                            />
+                                        ))}
+                                    </div>
+                                </div>
                             </div>
                             :
                             <div className="flex h-full items-center justify-center">

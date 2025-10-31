@@ -18,7 +18,7 @@ const FriendRequestItem = ({ userId, displayName, email, onAccept, onRemove  }: 
 
     return (
         <div
-            className="grid grid-cols-[1fr_auto] font-[family-name:var(--font-geist-mono)] rounded-3xl bg-[var(--color-bg-alt-accent)] hover:bg-[var(--color-background)] p-4 md:p-5 text-2xl md:text-3xl w-full h-max">
+            className="grid grid-cols-[1fr_auto] font-[family-name:var(--font-geist-mono)] rounded-3xl bg-[var(--color-bg-alt-accent)] hover:bg-[var(--color-bg-accent)] p-4 md:p-5 text-2xl md:text-3xl w-full h-max">
             <div className='pr-4 h-full flex items-center grid grid-rows-2 md:grid-rows-1 md:grid-cols-[auto_auto_auto_1fr] gap-3'>
                 <span className="truncate">{displayName}</span>
                 <span className="hidden md:inline">|</span>

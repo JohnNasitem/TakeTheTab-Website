@@ -442,7 +442,7 @@ export default function ActivityForm(formData: ActivityFormProps) {
                                     type="text" 
                                     id="new-activity-item"
                                     name="item"
-                                    className="bg-[var(--color-bg-alt-accent)] rounded-lg p-1 md:p-3 w-full"/>
+                                    className="bg-[var(--color-background)] rounded-lg p-1 md:p-3 w-full"/>
                                 {
                                     showItemNameErrorMessage &&
                                     <div className="text-[var(--color-bad)] text-sm md:text-lg md:col-span-2 text-center">
@@ -492,7 +492,7 @@ export default function ActivityForm(formData: ActivityFormProps) {
                                             e.preventDefault();
                                             }
                                         }}
-                                        className="p-1 md:p-3 bg-[var(--color-bg-alt-accent)] rounded-lg w-full"/>
+                                        className="p-1 md:p-3 bg-[var(--color-background)] rounded-lg w-full"/>
                                 </div>
                                 {
                                         showItemCostErrorMessage &&
@@ -584,7 +584,7 @@ export default function ActivityForm(formData: ActivityFormProps) {
                                                         e.preventDefault();
                                                         }
                                                     }}
-                                                    className="p-1 bg-[var(--color-bg-alt-accent)] rounded-lg w-full read-only:bg-[var(--color-bg-accent)]"/>
+                                                    className="p-1 bg-[var(--color-background)] rounded-lg w-full read-only:bg-[var(--color-bg-accent)]"/>
                                             </div>
                                         </div>
                                         <button 

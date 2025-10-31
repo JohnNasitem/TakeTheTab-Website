@@ -25,30 +25,32 @@ const ToggleSelect: React.FC<ToggleSelectProps> = ({
   };
 
   return (
-    <div className="grid grid-cols-[auto_1fr_1fr] gap-4 place-items-center w-full">
+    <div className="grid grid-cols-[auto_1fr] gap-4 place-items-center w-full">
       <div>{toggleName}</div>
-      <button
-        type="button"
-        onClick={() => handleSelect(true)}
-        className={`rounded-lg p-2 md:p-3 w-full ${
-          isLeftSelected
-            ? "bg-[var(--color-bg-alt-accent)] border-2 border-transparent hover:border-[var(--color-border)]"
-            : "bg-[var(--color-bg-accent)] border-2 border-transparent hover:border-[var(--color-border)]"
-        }`}
-      >
-        {leftLabel}
-      </button>
-      <button
-        type="button"
-        onClick={() => handleSelect(false)}
-        className={`rounded-lg p-2 md:p-3 w-full ${
-          !isLeftSelected
-            ? "bg-[var(--color-bg-alt-accent)] border-2 border-transparent hover:border-[var(--color-border)]"
-            : "bg-[var(--color-bg-accent)] border-2 border-transparent hover:border-[var(--color-border)]"
-        }`}
-      >
-        {rightLabel}
-      </button>
+      <div className="grid grid-cols-2 bg-[var(--color-background)] rounded-lg">
+        <button
+          type="button"
+          onClick={() => handleSelect(true)}
+          className={`rounded-lg p-2 md:p-3 w-full ${
+            isLeftSelected
+              ? "bg-[var(--color-bg-alt-accent)]"
+              : "bg-[var(--color-background)]"
+          }`}
+        >
+          {leftLabel}
+        </button>
+        <button
+          type="button"
+          onClick={() => handleSelect(false)}
+          className={`rounded-lg p-2 md:p-3 w-full ${
+            !isLeftSelected
+              ? "bg-[var(--color-bg-alt-accent)]"
+              : "bg-[var(--color-background)]"
+          }`}
+        >
+          {rightLabel}
+        </button>
+      </div>
     </div>
   );
 };
