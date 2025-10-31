@@ -41,6 +41,7 @@ html {
 .pageSection  {
   scroll-margin-top: 90px;
   min-height: calc(100vh - 90px);
+  height: calc(100vh - 90px);
 }
 
 .scrollbar-custom::-webkit-scrollbar {
