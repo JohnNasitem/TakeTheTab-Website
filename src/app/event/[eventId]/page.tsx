@@ -169,93 +169,97 @@ export default function FetchEventPage() {
             </div>
 
             {/* Participants */}
-            <div className={`rounded-3xl bg-[var(--color-bg-accent)] p-5 grid gap-3 content-start h-full w-full col-span-2`}>
-                <span className="text-center text-3xl md:text-4xl">Participants</span>
-                {participants.map((participant) => (
-                    <Disclosure 
-                        key={participant.participantData.userId}
-                        as="div" 
-                        className="rounded-3xl bg-[var(--color-bg-alt-accent)] hover:bg-[var(--color-background)] text-2xl md:text-3xl w-full h-max group" 
-                        defaultOpen={false}>
-                        <DisclosureButton className="group flex w-full items-center justify-between p-6 pb-0 md:p-5 md:group-data-[headlessui-state=open]:pb-0">
-                            <span className="truncate w-[70dvw] md:w-[25dvw] inline-block text-left">
-                                {participant.participantData.displayName}
-                            </span>
-                            <ChevronDownIcon className="size-5 fill-white/60 group-data-hover:fill-white/50 group-data-open:rotate-180" />
-                        </DisclosureButton>
-                        <DisclosurePanel className="mt-2 p-6 pt-0 md:p-5 md:pt-0">
-                            <div>
-                                <div className="text-ellipsis truncate w-full md:max-w-[25dvw] max-w-[70dvw]">
-                                    Email: {participant.participantData.email}
-                                </div>
-                                {
-                                    participant.participantData.amountOwedToYou > 0 &&
+            <div className="h-[71dvh] grid grid-rows-[auto_1fr] gap-3 p-5 bg-[var(--color-bg-accent)] rounded-3xl md:col-span-2">
+                <span className="text-center text-3xl md:text-4xl">Payers</span>
+                <div className="overflow-y-auto scrollbar-custom rounded-3xl">
+                    <div className="rounded-3xl grid gap-3 content-start min-h-full h-fit ml-1 mr-1 p-3">
+                        {participants.map((participant) => (
+                            <Disclosure 
+                                key={participant.participantData.userId}
+                                as="div" 
+                                className="rounded-3xl bg-[var(--color-bg-alt-accent)] hover:bg-[var(--color-background)] text-2xl md:text-3xl w-full h-max group" 
+                                defaultOpen={false}>
+                                <DisclosureButton className="group flex w-full items-center justify-between p-6 pb-0 md:p-5 md:group-data-[headlessui-state=open]:pb-0">
+                                    <span className="truncate w-[70dvw] md:max-w-[26dvw] inline-block text-left">
+                                        {participant.participantData.displayName}
+                                    </span>
+                                    <ChevronDownIcon className="size-5 fill-white/60 group-data-hover:fill-white/50 group-data-open:rotate-180" />
+                                </DisclosureButton>
+                                <DisclosurePanel className="mt-2 p-6 pt-0 md:p-5 md:pt-0">
                                     <div>
-                                        Amount Owed To You: <span className="text-[var(--color-good)]">{participant.participantData.amountOwedToYou}</span>
-                                        <div>
-                                            Has Paid: <span className={`${participant.participantData.hasPaid ? "text-[var(--color-good)]" : "text-[var(--color-bad)]"}`}>{participant.participantData.hasPaid ? "Yes" : "No"}</span>
+                                        <div className="text-ellipsis truncate w-full md:max-w-[25dvw] max-w-[70dvw]">
+                                            Email: {participant.participantData.email}
                                         </div>
                                         {
-                                            !participant.participantData.hasPaid && 
-                                            <button
-                                                type="button"
-                                                className="rounded-lg p-2 md:p-3 bg-[var(--color-action)] hover:bg-[var(--color-action-accent)]"
-                                                onClick={RemindUserToPay}>
-                                                Remind User To Pay
-                                            </button>
-                                        }
-                                        {
-                                            participant.participantData.hasPaid && 
-                                            <button
-                                                type="button"
-                                                className="rounded-lg p-2 md:p-3 bg-[var(--color-action)] hover:bg-[var(--color-action-accent)]"
-                                                onClick={ConfirmParticipantPayment}>
-                                                {participant.participantData.paymentConfirmed ? "Confirm Payment" : "Unconfirm Payment"} 
-                                            </button>
-                                        }
-                                    </div>
-                                }
-                                {
-                                    participant.participantData.amountOwedToYou < 0 &&
-                                    <div>
-                                        Amount You Owe: <span className="text-[var(--color-bad)]">{participant.participantData.amountOwedToYou * -1}</span>
-                                        {
-                                            !participant.participantData.hasPaid && 
+                                            participant.participantData.amountOwedToYou > 0 &&
                                             <div>
-                                                <button
-                                                    type="button"
-                                                    className="rounded-lg p-2 md:p-3 bg-[var(--color-action)] hover:bg-[var(--color-action-accent)]"
-                                                    onClick={() => PayBackUser(participant.participantData.userId)}>
-                                                    Pay back
-                                                </button>
-                                            </div>
-                                        }
-                                        {
-                                            participant.participantData.hasPaid && 
-                                            <div>
+                                                Amount Owed To You: <span className="text-[var(--color-good)]">{participant.participantData.amountOwedToYou}</span>
+                                                <div>
+                                                    Has Paid: <span className={`${participant.participantData.hasPaid ? "text-[var(--color-good)]" : "text-[var(--color-bad)]"}`}>{participant.participantData.hasPaid ? "Yes" : "No"}</span>
+                                                </div>
                                                 {
-                                                    participant.participantData.paymentConfirmed &&
-                                                    <div>
-                                                        Payment Confirmed: <span className={`${participant.participantData.paymentConfirmed ? "text-[var(--color-good)]" : "text-[var(--color-bad)]"}`}>{participant.participantData.paymentConfirmed ? "Yes" : "No"}</span>
-                                                    </div>
-                                                }
-                                                {
-                                                    !participant.participantData.paymentConfirmed &&
+                                                    !participant.participantData.hasPaid && 
                                                     <button
                                                         type="button"
                                                         className="rounded-lg p-2 md:p-3 bg-[var(--color-action)] hover:bg-[var(--color-action-accent)]"
-                                                        onClick={RequestPaymentConfirmation}>
-                                                        Request Payment Confirmation
+                                                        onClick={RemindUserToPay}>
+                                                        Remind User To Pay
+                                                    </button>
+                                                }
+                                                {
+                                                    participant.participantData.hasPaid && 
+                                                    <button
+                                                        type="button"
+                                                        className="rounded-lg p-2 md:p-3 bg-[var(--color-action)] hover:bg-[var(--color-action-accent)]"
+                                                        onClick={ConfirmParticipantPayment}>
+                                                        {participant.participantData.paymentConfirmed ? "Confirm Payment" : "Unconfirm Payment"} 
                                                     </button>
                                                 }
                                             </div>
                                         }
+                                        {
+                                            participant.participantData.amountOwedToYou < 0 &&
+                                            <div>
+                                                Amount You Owe: <span className="text-[var(--color-bad)]">{participant.participantData.amountOwedToYou * -1}</span>
+                                                {
+                                                    !participant.participantData.hasPaid && 
+                                                    <div>
+                                                        <button
+                                                            type="button"
+                                                            className="rounded-lg p-2 md:p-3 bg-[var(--color-action)] hover:bg-[var(--color-action-accent)]"
+                                                            onClick={() => PayBackUser(participant.participantData.userId)}>
+                                                            Pay back
+                                                        </button>
+                                                    </div>
+                                                }
+                                                {
+                                                    participant.participantData.hasPaid && 
+                                                    <div>
+                                                        {
+                                                            participant.participantData.paymentConfirmed &&
+                                                            <div>
+                                                                Payment Confirmed: <span className={`${participant.participantData.paymentConfirmed ? "text-[var(--color-good)]" : "text-[var(--color-bad)]"}`}>{participant.participantData.paymentConfirmed ? "Yes" : "No"}</span>
+                                                            </div>
+                                                        }
+                                                        {
+                                                            !participant.participantData.paymentConfirmed &&
+                                                            <button
+                                                                type="button"
+                                                                className="rounded-lg p-2 md:p-3 bg-[var(--color-action)] hover:bg-[var(--color-action-accent)]"
+                                                                onClick={RequestPaymentConfirmation}>
+                                                                Request Payment Confirmation
+                                                            </button>
+                                                        }
+                                                    </div>
+                                                }
+                                            </div>
+                                        }
                                     </div>
-                                }
-                            </div>
-                        </DisclosurePanel>
-                    </Disclosure>
-                ))}
+                                </DisclosurePanel>
+                            </Disclosure>
+                        ))}
+                    </div>
+                </div>
             </div>
         </div>
     );

@@ -98,7 +98,7 @@ export default function FetchActivityPage() {
                                 className="rounded-3xl bg-[var(--color-bg-accent)] hover:bg-[var(--color-bg-alt-accent)] text-2xl md:text-3xl w-full h-max group" 
                                 defaultOpen={false}>
                                 <DisclosureButton className="group flex w-full items-center justify-between p-6 pb-0 md:p-5 md:group-data-[headlessui-state=open]:pb-0">
-                                    <span className="">
+                                    <span className="truncate w-full max-w-[55dvw] inline-block text-left">
                                         {item.itemName}
                                     </span>
                                     <ChevronDownIcon className="size-5 fill-white/60 group-data-hover:fill-white/50 group-data-open:rotate-180" />
@@ -119,8 +119,11 @@ export default function FetchActivityPage() {
                                         </div>
                                         {item.payers.map((payer) => (
                                             <div
-                                                key={`item-payer-${payer.payerId}`}>
-                                                <span className="text-ellipsis truncate">{payer.payerName} | {payer.payerEmail}</span> : ${(activity.addFivePercentTax ? payer.amountOwing * 1.05 : payer.amountOwing).toFixed(2)}
+                                                key={`item-payer-${payer.payerId}`}
+                                                className="grid grid-cols-[auto_auto_1fr] gap-2 items-center">
+                                                <span className="truncate h-full max-w-[30dvw] inline-block">{payer.payerName} | {payer.payerEmail}</span>
+                                                <span className="inline-block h-full">:</span>
+                                                <span className="truncate h-full max-w-[20dvw] inline-block">${(activity.addFivePercentTax ? payer.amountOwing * 1.05 : payer.amountOwing).toFixed(2)}</span>
                                             </div>
                                         ))
                                         }
@@ -134,7 +137,7 @@ export default function FetchActivityPage() {
                             className="rounded-3xl bg-[var(--color-action)] hover:bg-[var(--color-action-accent)] text-2xl md:text-3xl w-full h-max group" 
                             defaultOpen={false}>
                             <DisclosureButton className="group flex w-full items-center justify-between p-6 pb-0 md:p-5 md:group-data-[headlessui-state=open]:pb-0">
-                                <span className="">
+                                <span className="truncate w-full max-w-[26dvw] inline-block text-left">
                                     Grand Total: ${getActivityGrandTotal().toFixed(2)}
                                 </span>
                                 <ChevronDownIcon className="size-5 fill-white/60 group-data-hover:fill-white/50 group-data-open:rotate-180" />
@@ -164,7 +167,7 @@ export default function FetchActivityPage() {
             <div className="h-[71dvh] grid grid-rows-[auto_1fr] gap-3 p-5 bg-[var(--color-bg-accent)] rounded-3xl">
                 <span className="text-center text-3xl md:text-4xl">Payers</span>
                 <div className="overflow-y-auto scrollbar-custom rounded-3xl">
-                    <div className="rounded-3xl grid gap-3 content-start min-h-full h-fit ml-1 mr-1">
+                    <div className="rounded-3xl grid gap-3 content-start min-h-full h-fit ml-1 mr-1 p-3">
                         {activity?.payers?.map((payer) => (
                             <Disclosure 
                                 key={payer.payerId}
@@ -172,7 +175,7 @@ export default function FetchActivityPage() {
                                 className="rounded-3xl bg-[var(--color-bg-alt-accent)] hover:bg-[var(--color-background)] text-2xl md:text-3xl w-full h-max group" 
                                 defaultOpen={false}>
                                 <DisclosureButton className="group flex w-full items-center justify-between p-6 pb-0 md:p-5 md:group-data-[headlessui-state=open]:pb-0">
-                                    <span className="">
+                                    <span className="truncate w-full max-w-[26dvw] inline-block text-left">
                                         {payer.payerName}
                                     </span>
                                     <ChevronDownIcon className="size-5 fill-white/60 group-data-hover:fill-white/50 group-data-open:rotate-180" />
