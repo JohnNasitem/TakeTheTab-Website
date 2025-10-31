@@ -322,7 +322,7 @@ export default function ActivityForm(formData: ActivityFormProps) {
                 {/* Title */}
                 <h1 className="text-3xl md:text-4xl">{formData.title}</h1>
 
-                <div className="grid grid-cols-[49fr_51fr] w-full gap-4">
+                <div className="grid grid-cols-2 w-full gap-4">
                     {/* Activity fields */}
                     <div className="flex">
                         <div
@@ -360,9 +360,10 @@ export default function ActivityForm(formData: ActivityFormProps) {
                             />
                             <div
                                 className="grid grid-cols-2 gap-3 w-full">
-                                <div
-                                    className="flex place-items-center h-full">
-                                    Gratuity Amount:
+                                <div className="flex place-items-center h-max md:h-full w-full">
+                                    <label htmlFor="create-activity-gratuity-amount" className="text-center w-full">
+                                        Gratuity Amount:
+                                    </label>
                                 </div>
                                 <div className="flex w-full justify-center items-center">
                                     <div className={`grid ${isGratuityPertcent ? "grid-cols-[1fr_auto]" : "grid-cols-[auto_1fr]"} h-full items-center`}>
@@ -449,7 +450,7 @@ export default function ActivityForm(formData: ActivityFormProps) {
                         </div>
                         <div className="flex h-[50dvh] w-full flex-col rounded-3xl">
                             <div className="flex-1 overflow-y-scroll scrollbar-custom rounded-3xl w-full bg-[var(--color-bg-accent)] p-1">
-                                <div className="grid gap-3 content-start rounded-2xl bg-[var(--color-background)] p-3 min-h-full h-fit">
+                                <div className="grid gap-3 content-start rounded-3xl bg-[var(--color-background)] p-3 min-h-full h-fit">
                                     {items.map(
                                         (item, index) => (
                                             <Disclosure 
