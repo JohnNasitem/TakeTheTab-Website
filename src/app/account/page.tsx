@@ -161,7 +161,7 @@ export default function AccountPage() {
                     value={displayName} 
                     onChange={(e) => setDisplayName(e.target.value)}
                     disabled={!isEditing} 
-                    className={`${isEditing ? "text-[var(--color-foreground)]" : "text-[var(--color-disabled-foreground)]"} bg-[var(--color-bg-alt-accent)] rounded-lg p-3 w-full`}/>
+                    className={`${isEditing ? "text-[var(--color-foreground)]" : "text-[var(--color-disabled-foreground)]"} bg-[var(--color-background)] rounded-lg p-3 w-full`}/>
                 
                 <label 
                     htmlFor="profile-email"
@@ -173,7 +173,7 @@ export default function AccountPage() {
                     value={email} 
                     onChange={(e) => setEmail(e.target.value)}
                     disabled={!isEditing} 
-                    className={`${isEditing ? "text-[var(--color-foreground)]" : "text-[var(--color-disabled-foreground)]"} bg-[var(--color-bg-alt-accent)] rounded-lg p-3 w-full`}/>
+                    className={`${isEditing ? "text-[var(--color-foreground)]" : "text-[var(--color-disabled-foreground)]"} bg-[var(--color-background)] rounded-lg p-3 w-full`}/>
 
                 <button
                     onClick={() => setIsEditing(!isEditing)}
@@ -203,7 +203,7 @@ export default function AccountPage() {
                     onChange={ValidateNewPassword} 
                     type="password" 
                     autoComplete="current-password"
-                    className={`bg-[var(--color-bg-alt-accent)] rounded-lg p-3 border w-full`}/>
+                    className={`bg-[var(--color-background)] rounded-lg p-3 w-full`}/>
 
                 <label 
                     htmlFor="account-new-password" 
@@ -215,7 +215,7 @@ export default function AccountPage() {
                     onChange={ValidateNewPassword} 
                     type="password" 
                     autoComplete="new-password"
-                    className={`bg-[var(--color-bg-alt-accent)] rounded-lg p-3 border w-full`}/>
+                    className={`bg-[var(--color-background)] rounded-lg p-3 w-full`}/>
 
                 <label 
                     htmlFor="account-confirm-new-password" 
@@ -227,7 +227,7 @@ export default function AccountPage() {
                     onChange={ValidateNewPassword} 
                     type="password" 
                     autoComplete="new-password"
-                    className={`bg-[var(--color-bg-alt-accent)] rounded-lg p-3 border w-full`}/>
+                    className={`bg-[var(--color-background)] rounded-lg p-3 w-full`}/>
 
                 <div
                     className="grid grid-cols-[1fr_max-content] md:col-span-2">
