@@ -144,21 +144,21 @@ export default function FetchEventPage() {
             </div>
 
             {/* Owed amount */}
-            <div className="grid grid-rows-[min-content_1fr] text-center bg-[var(--color-bg-accent)] rounded-3xl p-5 w-full">
+            <div className="grid grid-rows-[min-content_1fr] text-center bg-[var(--color-good)] rounded-3xl p-5 w-full">
                 <span className="block md:inline text-2xl md:text-3xl">
                     Owed
                 </span>
-                <div className="text-4xl md:text-6xl text-[var(--color-good)] w-full">
+                <div className="text-4xl md:text-6xl w-full">
                     ${event?.userTotalOwed ?? 0}
                 </div>
             </div>
 
             {/* Debt amount */}
-            <div className="grid grid-rows-[min-content_1fr] text-center bg-[var(--color-bg-accent)] rounded-3xl p-5 w-full">
+            <div className="grid grid-rows-[min-content_1fr] text-center bg-[var(--color-bad)] rounded-3xl p-5 w-full">
                 <span className="block md:inline text-2xl md:text-3xl">
                     Debt
                 </span>
-                <div className="text-4xl md:text-6xl text-[var(--color-bad)]">
+                <div className="text-4xl md:text-6xl">
                     ${event?.userTotalOwing ?? 0}
                 </div>
             </div>

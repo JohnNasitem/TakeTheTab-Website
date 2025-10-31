@@ -77,11 +77,11 @@ export default function FetchActivityPage() {
             </div>
 
             {/* Owed/Debt amount */}
-            <div className="grid grid-rows-[auto_1fr] text-center bg-[var(--color-bg-accent)] rounded-3xl p-5">
+            <div className={`grid grid-rows-[auto_1fr] text-center rounded-3xl p-5  ${activity?.isPayee ? "bg-[var(--color-good)]" : "bg-[var(--color-bad)]"}`}>
                 <span className="block md:inline text-2xl md:text-3xl">
                     {activity?.isPayee ? "Owed" : "Debt"}
                 </span>
-                <div className={`text-4xl md:text-6xl w-full ${activity?.isPayee ? "text-[var(--color-good)]" : "text-[var(--color-bad)]"}`}>
+                <div className="text-4xl md:text-6xl w-full">
                     ${activity?.amount ?? 0}
                 </div>
             </div>
