@@ -25,9 +25,9 @@ const ToggleSelect: React.FC<ToggleSelectProps> = ({
   };
 
   return (
-    <div className="grid grid-cols-[auto_1fr] gap-4 place-items-center w-full">
+    <div className="grid grid-cols-2 gap-4 place-items-center w-full">
       <div>{toggleName}</div>
-      <div className="grid grid-cols-2 bg-[var(--color-background)] rounded-lg">
+      <div className="grid grid-cols-2 bg-[var(--color-background)] rounded-lg w-full">
         <button
           type="button"
           onClick={() => handleSelect(true)}
