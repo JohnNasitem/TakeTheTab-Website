@@ -1,8 +1,9 @@
 import { useCallback } from "react";
 import { sendApiCall } from "@/components/server-api-serivces/api-util";
 import { FetchEventResponse, GenericResponse, CreateEventResponse } from "@/interfaces/server-responses";
+import { API_BASE_URL } from "@/components/server-api-serivces/api-config";
 
-const serverPath = "https://api.takethetab.com/events";
+const serverPath = `${API_BASE_URL}/events`;
 
 interface CreateEventType {
     eventName: string;

@@ -1,8 +1,9 @@
 import { useCallback } from "react";
 import { GenericResponse } from "@/interfaces/server-responses"
 import { sendApiCall } from "@/components/server-api-serivces/api-util";
+import { API_BASE_URL } from "@/components/server-api-serivces/api-config";
 
-const serverPath = "https://api.takethetab.com/auth";
+const serverPath = `${API_BASE_URL}/auth`;
 
 interface CreateUserType {
   displayName: string;

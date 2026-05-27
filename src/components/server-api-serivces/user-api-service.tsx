@@ -1,8 +1,9 @@
 import { useCallback } from "react";
 import { sendApiCall } from "@/components/server-api-serivces/api-util";
 import { FetchUserResponse, GenericResponse } from "@/interfaces/server-responses";
+import { API_BASE_URL } from "@/components/server-api-serivces/api-config";
 
-const serverPath = "https://api.takethetab.com/user";
+const serverPath = `${API_BASE_URL}/user`;
 
 interface EditUserProfileType {
     displayName: string;

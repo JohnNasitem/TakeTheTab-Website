@@ -2,8 +2,9 @@ import { useCallback } from "react";
 import { sendApiCall } from "@/components/server-api-serivces/api-util";
 import { FetchActivityResponse, GenericResponse, CreateActivityResponse } from "@/interfaces/server-responses";
 import { ActivityItem } from "@/interfaces/parameters"
+import { API_BASE_URL } from "@/components/server-api-serivces/api-config";
 
-const serverPath = "https://api.takethetab.com/events";
+const serverPath = `${API_BASE_URL}/events`;
 
 interface CreateActivityType {
     eventId: number;
