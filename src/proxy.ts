@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import jwt from 'jsonwebtoken'
+import { API_BASE_URL } from "@/components/server-api-serivces/api-config";
 
 const publicRoutes = ['/login', '/signup']
 
@@ -9,7 +10,7 @@ interface GenericResponse {
   errorMessage?: string | null;
 }
 
-export default async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const pathname = request.nextUrl.pathname
   const isPublic = publicRoutes.includes(pathname)
 
@@ -35,13 +36,11 @@ async function validateTokens(accessToken?: string, refreshToken?: string): Prom
     return false
 
   // Check access token validity
-  let isAccessTokenValid = false
   if (accessToken) {
     try {
       const decoded = jwt.decode(accessToken) as { exp: number }
       if (decoded && decoded.exp * 1000 > Date.now()) {
         // Access token is still valid
-        isAccessTokenValid = true
         return true
       }
     } catch {
@@ -51,7 +50,7 @@ async function validateTokens(accessToken?: string, refreshToken?: string): Prom
 
   // If access token is missing or expired, call backend to refresh
   try {
-    const res = await fetch(`https://api.takethetab.com/auth/refresh`, {
+    const res = await fetch(`${API_BASE_URL}/auth/refresh`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
