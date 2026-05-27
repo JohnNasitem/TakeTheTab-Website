@@ -9,7 +9,7 @@ interface GenericResponse {
   errorMessage?: string | null;
 }
 
-export async function middleware(request: NextRequest) {
+export default async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname
   const isPublic = publicRoutes.includes(pathname)
 
