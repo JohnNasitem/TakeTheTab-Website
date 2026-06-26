@@ -13,8 +13,23 @@ export async function sendApiCall<T>(url: string, method: string, body?: string)
 
     const res = await fetch(url, options);
 
-    if (!res.ok)
-        throw new Error(`Api call failed! Endpoint: ${url}, Method: ${method}, Body: ${body}, Erorr: ${res.status} - ${res.statusText}`);
+    if (!res.ok) {
+    let errorDetails = `${res.status} - ${res.statusText}`;
+    
+    try {
+        const errorBody = await res.json();
+        errorDetails = JSON.stringify(errorBody);
+    } catch {
+        // response wasn't JSON, try plain text
+        try {
+            errorDetails = await res.text();
+        } catch {
+            // fall back to status only
+        }
+    }
+    
+    throw new Error(`API call failed! Endpoint: ${url}, Method: ${method}, Body: ${body}, Error: ${errorDetails}`);
+}
 
     const data = await res.json() as T;
 
