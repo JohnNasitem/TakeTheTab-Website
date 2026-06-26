@@ -262,20 +262,32 @@ export default function EventForm(eventFormData: EventForm) {
                 </ul>
                 
                 <div
-                    className="grid grid-cols-2 gap-4 md:col-span-2 w-full">
-                    {/* Cancel button */}
-                    <button
-                        type="button"
-                        onClick={() => router.push(`/`)}
-                        className="bg-[var(--color-bad)] hover:bg-[var(--color-bad-accent)] text-[var(--color-foreground)] rounded-lg p-3 w-full">
-                        Cancel
-                    </button>
-                    {/* Submit/Edit Button */}
-                    <button
-                        type="submit"
-                        className="bg-[var(--color-good)] hover:bg-[var(--color-good-accent)] text-[var(--color-foreground)] rounded-lg p-3 w-full">
-                        {eventFormData.isCreatingEvent ? "Create" : "Save"}
-                    </button>
+                    className={`flex ${eventFormData.isCreatingEvent ? "justify-end" : "justify-between"} w-full md:col-span-2`}>
+                    {/* Delete button */}
+                    { !eventFormData.isCreatingEvent &&
+                        <button
+                            type="button"
+                            onClick={() => router.push(`/`)} //TODO: implement delete event functionality
+                            className="bg-[var(--color-bad)] hover:bg-[var(--color-bad-accent)] text-[var(--color-foreground)] rounded-lg p-3 w-max">
+                            Delete Event
+                        </button>
+                    }
+                    <div
+                        className="flex gap-2">
+                        {/* Cancel button */}
+                        <button
+                            type="button"
+                            onClick={() => router.push(`/`)}
+                            className="bg-[var(--color-bad)] hover:bg-[var(--color-bad-accent)] text-[var(--color-foreground)] rounded-lg p-3 w-max">
+                            Cancel
+                        </button>
+                        {/* Submit/Edit Button */}
+                        <button
+                            type="submit"
+                            className="bg-[var(--color-good)] hover:bg-[var(--color-good-accent)] text-[var(--color-foreground)] rounded-lg p-3 w-max">
+                            {eventFormData.isCreatingEvent ? "Create" : "Save"}
+                        </button>
+                    </div>
                 </div>
                 {
                     showRequestErrorMessage &&
