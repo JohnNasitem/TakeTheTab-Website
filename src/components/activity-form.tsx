@@ -341,7 +341,7 @@ export default function ActivityForm(formData: ActivityFormProps) {
                 {/* Title */}
                 <h1 className="text-3xl md:text-4xl">{formData.title}</h1>
 
-                <div className="grid grid-cols-2 w-full gap-4">
+                <div className="grid md:grid-cols-2 w-full gap-4">
                     {/* Activity fields */}
                     <div className="flex">
                         <div
@@ -518,7 +518,7 @@ export default function ActivityForm(formData: ActivityFormProps) {
 
                     {
                         showPayerErrorMessage &&
-                        <div className="text-[var(--color-bad)] text-sm md:text-lg">
+                        <div className="text-[var(--color-bad)] text-sm md:text-lg md:col-span-2 text-center">
                             Must add at least 1 item!
                         </div>
                     }
