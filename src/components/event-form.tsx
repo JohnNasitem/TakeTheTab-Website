@@ -9,6 +9,7 @@ import SearchDropdown from "@/components/search-dropdown"
 import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/style.css';
 import { Dialog, DialogPanel, DialogTitle } from '@headlessui/react'
+import { CreateEventResponse } from "@/interfaces/server-responses";
 
 interface EventForm {
     title: string;
@@ -132,7 +133,7 @@ export default function EventForm(eventFormData: EventForm) {
         }
 
         if (data.actionSuccess)
-            router.push(`/event/${eventId}`);
+            router.push(`/event/${eventFormData.isCreatingEvent ? (data as CreateEventResponse).eventId : eventId}`);
         else {
             setRequestErrorMessage(data.errorMessage!);
             setShowRequestErrorMessage(true);
