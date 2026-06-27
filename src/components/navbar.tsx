@@ -8,8 +8,8 @@ import { HomeIcon, UserIcon, UserGroupIcon } from '@heroicons/react/20/solid'
 function Navbar() {
     const navbarLinks = [
         { icon: HomeIcon, href: "/" },
-        { icon: UserIcon, href: "/account" },
-        { icon: UserGroupIcon, href: "/friends" }
+        { icon: UserGroupIcon, href: "/friends" },
+        { icon: UserIcon, href: "/account" }
     ]
     const logo = "/icon.svg";
 
