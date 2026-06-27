@@ -35,7 +35,7 @@ interface ActivityFormProps {
 export default function ActivityForm(formData: ActivityFormProps) {
     const { fetchEvent } = EventApiService();
     const { fetchUser } = UserApiService();
-    const { createActivity, updateActivity } = ActivityApiService();
+    const { createActivity, updateActivity, deleteActivity } = ActivityApiService();
     const router = useRouter();
     const params = useParams();
 
@@ -207,28 +207,30 @@ export default function ActivityForm(formData: ActivityFormProps) {
         }
         else
             setShowPayerErrorMessage(false);
+
+        let gratuityAmount = undefined;
+
         if (!gratuityAmountStr || gratuityAmountStr.trim() === "") {
             setGratuityErrorMessage("Must add a gratuity amount!");
             setShowGratuityErrorMessage(true);
             errorsExist = true;
         }
-        else 
-            setShowGratuityErrorMessage(false);
+        else {
+            gratuityAmount = Number(gratuityAmountStr);
 
-        const gratuityAmount = Number(gratuityAmountStr);
-
-        if (isGratuityPertcent && gratuityAmount > 1000) {
-            setGratuityErrorMessage("Percent gratuity amounts must be a number between 1-1000");
-            setShowGratuityErrorMessage(true);
-            errorsExist = true;
+            if (isGratuityPertcent && gratuityAmount > 1000) {
+                setGratuityErrorMessage("Percent gratuity amounts must be a number between 0-1000");
+                setShowGratuityErrorMessage(true);
+                errorsExist = true;
+            }
+            else if (!isGratuityPertcent && gratuityAmount > 999999999) {
+                setGratuityErrorMessage("Flat gratuity amounts must be a number between 1-999,999,999");
+                setShowGratuityErrorMessage(true);
+                errorsExist = true;
+            }
+            else
+                setShowGratuityErrorMessage(false);
         }
-        else if (!isGratuityPertcent && gratuityAmount > 999999999) {
-            setGratuityErrorMessage("Flat gratuity amounts must be a number between 1-999,999,999");
-            setShowGratuityErrorMessage(true);
-            errorsExist = true;
-        }
-        else 
-            setShowGratuityErrorMessage(false);
 
         if (errorsExist)
             return;
@@ -710,22 +712,43 @@ export default function ActivityForm(formData: ActivityFormProps) {
                 </div>
                 
                 <div
-                    className="grid grid-cols-2 w-full gap-2">
+                    className={`flex ${formData.isCreatingActivity ? "justify-end" : "justify-between"} w-full`}>
+                    {/* Delete button */}
+                    { !formData.isCreatingActivity &&
+                        <button
+                            type="button"
+                            onClick={async () => {
+                                const data = await deleteActivity({eventId: Number(params.eventId as string), activityId: Number(params.activityId as string)});
+                                
+                                if (data.actionSuccess)
+                                    router.push(`../../`);
+                                else {
+                                    setRequestErrorMessage(data.errorMessage!);
+                                    setShowRequestErrorMessage(true);
+                                }
+                            }}
+                            className="bg-[var(--color-bad)] hover:bg-[var(--color-bad-accent)] text-[var(--color-foreground)] rounded-lg p-3 w-max">
+                            Delete Activity
+                        </button>
+                    }
                     {/* Cancel Button */}
-                    <button
-                        type="button"
-                        onClick={() => {
-                            router.push(`../`);
-                        }}
-                        className="bg-[var(--color-bad)] hover:bg-[var(--color-bad-accent)] text-[var(--color-foreground)] rounded-lg p-3 w-full">
-                        Cancel
-                    </button>
-                    {/* Submit Button */}
-                    <button
-                        type="submit"
-                        className="bg-[var(--color-good)] hover:bg-[var(--color-good-accent)] text-[var(--color-foreground)] rounded-lg p-3 w-full">
-                        {formData.isCreatingActivity ? "Create" : "Save"}
-                    </button>
+                    <div
+                        className="flex gap-2">
+                        <button
+                            type="button"
+                            onClick={() => {
+                                router.push(`../`);
+                            }}
+                            className="bg-[var(--color-bad)] hover:bg-[var(--color-bad-accent)] text-[var(--color-foreground)] rounded-lg p-3 w-full">
+                            Cancel
+                        </button>
+                        {/* Submit Button */}
+                        <button
+                            type="submit"
+                            className="bg-[var(--color-good)] hover:bg-[var(--color-good-accent)] text-[var(--color-foreground)] rounded-lg p-3 w-full">
+                            {formData.isCreatingActivity ? "Create" : "Save"}
+                        </button>
+                    </div>
                 </div>
                 {
                     showRequestErrorMessage &&
