@@ -22,9 +22,9 @@ interface EventForm {
 export default function EventForm(eventFormData: EventForm) {
     const { fetchFriends } = FriendsApiService();
     const { fetchUser } = UserApiService();
-    const { createEvent, updateEvent } = EventApiService();
+    const { createEvent, updateEvent, deleteEvent } = EventApiService();
     const router = useRouter();
-    const params = useParams();
+    const eventId = Number(useParams().eventId as string);
 
     const [availableFriends, setAvailableFriends] = useState<Record<number, [string, string]>>([]);
     const [participants, setParticipants] = useState<Record<number, [string, string]>>([]);
@@ -123,18 +123,16 @@ export default function EventForm(eventFormData: EventForm) {
             return;
 
         let data = null;
-        let eId = Number(params.eventId as string);
 
         if (eventFormData.isCreatingEvent) {
             data = await createEvent({ eventName: eventName as string, eventDate: selectedDate as Date, participants: participantIds });
-            eId = data.eventId as number;
         }
         else {
-            data = await updateEvent({ eventId: Number(params.eventId as string), eventName: eventName as string, eventDate: selectedDate as Date, participants: participantIds });
+            data = await updateEvent({ eventId: eventId, eventName: eventName as string, eventDate: selectedDate as Date, participants: participantIds });
         }
 
         if (data.actionSuccess)
-            router.push(`/event/${eId}`);
+            router.push(`/event/${eventId}`);
         else {
             setRequestErrorMessage(data.errorMessage!);
             setShowRequestErrorMessage(true);
@@ -267,7 +265,16 @@ export default function EventForm(eventFormData: EventForm) {
                     { !eventFormData.isCreatingEvent &&
                         <button
                             type="button"
-                            onClick={() => router.push(`/`)} //TODO: implement delete event functionality
+                            onClick={async () => {
+                                const data = await deleteEvent(eventId);
+                                
+                                if (data.actionSuccess)
+                                    router.push(`/`);
+                                else {
+                                    setRequestErrorMessage(data.errorMessage!);
+                                    setShowRequestErrorMessage(true);
+                                }
+                            }}
                             className="bg-[var(--color-bad)] hover:bg-[var(--color-bad-accent)] text-[var(--color-foreground)] rounded-lg p-3 w-max">
                             Delete Event
                         </button>
